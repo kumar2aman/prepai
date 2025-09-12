@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { webmToPCM } from "../utils/createRawPcm.js";
+import { webmToPCM } from "../../utils/createRawPcm.js";
 
 const router: Router = Router();
 

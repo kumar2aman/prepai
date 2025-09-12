@@ -1,7 +1,8 @@
 import { Router } from "express";
 
-import { ephemeralTokenRouter } from "../api/ephemeral-token.js";
-import { convertAudioRouter } from "../api/convert-audio.js";
+import { ephemeralTokenRouter } from "../api/v1/ephemeral-token.js";
+import { convertAudioRouter } from "../api/v1/convert-audio.js";
+
 
 
 
