@@ -1,46 +1,87 @@
 import { Router } from "express";
-
 import bcrypt from "bcryptjs";
 import prisma from "../../../db.js";
+import jwt from "jsonwebtoken";
+import { signinSchema, signupSchema } from "../../../types/schema.js";
+import { sign } from "crypto";
+
 
 const router: Router = Router();
 
-router.post("/", async (req, res) => {
-  const user = req.body;
+router.post("/signup", async (req, res) => {
+ 
+    const user = signupSchema.safeParse(req.body);
 
-  if (!user) {
-    return res.status(400).json("No user data received.");
+  if (!user.success) {
+    return res.status(400).json({ error: "No user data received." });
   }
-
-  const existingUser = await prisma.user.findUnique({
+try {
+    const existingUser = await prisma.user.findUnique({
     where: {
-      email: user.email,
-      username: user.username,
+      email: user.data?.email,
+      username: user.data?.username,
     },
   });
 
-  if (existingUser?.email) {
+   if (existingUser?.email) {
     return res.status(400).send("User email already exists.");
   }
   if (existingUser?.username) {
     return res.status(400).send("Username already exists.");
   }
 
-
-const encryptedpassword = await bcrypt.hash(user.password, 10);
+  const encryptedpassword = await bcrypt.hash(user.data?.password!, 10);
 
   const response = prisma.user.create({
     data: {
-      username: user.username,
-      email: user.email,
+      username: user.data?.username,
+      email: user.data?.email,
       password: encryptedpassword,
     },
   });
 
-  res.status(200).json({ message:"User created successfully" });
+  res.status(200).json({ message: "User created successfully" });
+} catch (error) {
+    res.status(500).json({ error: "Failed to create user" });
+}
+  
 
-
+ 
 });
 
+router.post("/signin", async (req, res) => {
+  const user = signinSchema.safeParse(req.body);
 
-export { router as signinHandler };
+  if (!user.success) {
+    return res.status(400).json("No user data received.");
+  }
+
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email: user.data?.email,
+    },
+  });
+
+  if (!existingUser) {
+    return res.status(400).json({ error: "User does not exist." });
+  }
+
+  const isPasswordValid = await bcrypt.compare(
+    user.data?.password!,
+    existingUser.password
+  );
+
+  if (!isPasswordValid) {
+    return res.status(400).json({ error: "Invalid password." });
+  }
+
+  const userid = existingUser.id;
+
+  const token = jwt.sign({ userid }, process.env.JWT_SECRET!, {
+    expiresIn: "2d",
+  });
+
+  res.status(200).json({ token });
+});
+
+export { router as authRouter };
