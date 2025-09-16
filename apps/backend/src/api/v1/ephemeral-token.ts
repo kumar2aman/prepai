@@ -1,12 +1,13 @@
 import "dotenv/config";
 import { GoogleGenAI } from "@google/genai";
 import { Router } from "express";
+import { authMiddleware } from "../../auth-middelware.js";
 
 const router: Router = Router();
 
 const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
     const expireTime = new Date(Date.now() + 30 * 60 * 1000).toISOString();
 
