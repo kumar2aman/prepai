@@ -1,15 +1,19 @@
 import { Router } from "express";
+import express from "express";
 import bcrypt from "bcryptjs";
 import prisma from "../../../db.js";
 import jwt from "jsonwebtoken";
 import { signinSchema, signupSchema } from "../../../types/schema.js";
-import { sign } from "crypto";
 
+const app = express();
+
+app.use(express.json());
 
 const router: Router = Router();
 
 router.post("/signup", async (req, res) => {
  
+    console.log("signup endpoint called!");
     const user = signupSchema.safeParse(req.body);
 
   if (!user.success) {
@@ -24,15 +28,15 @@ try {
   });
 
    if (existingUser?.email) {
-    return res.status(400).send("User email already exists.");
+    return res.status(400).json("User email already exists.");
   }
   if (existingUser?.username) {
-    return res.status(400).send("Username already exists.");
+    return res.status(400).json("Username already exists.");
   }
 
   const encryptedpassword = await bcrypt.hash(user.data?.password!, 10);
 
-  const response = prisma.user.create({
+  const response = await prisma.user.create({
     data: {
       username: user.data?.username,
       email: user.data?.email,
@@ -40,7 +44,9 @@ try {
     },
   });
 
-  res.status(200).json({ message: "User created successfully" });
+  
+
+  res.status(200).json({ message: "User created successfully", response: response });
 } catch (error) {
     res.status(500).json({ error: "Failed to create user" });
 }
