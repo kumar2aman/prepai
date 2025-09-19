@@ -12,47 +12,43 @@ app.use(express.json());
 const router: Router = Router();
 
 router.post("/signup", async (req, res) => {
- 
-    console.log("signup endpoint called!");
-    const user = signupSchema.safeParse(req.body);
+
+  const user = signupSchema.safeParse(req.body);
 
   if (!user.success) {
     return res.status(400).json({ error: "No user data received." });
   }
-try {
+  try {
     const existingUser = await prisma.user.findUnique({
-    where: {
-      email: user.data?.email,
-      username: user.data?.username,
-    },
-  });
+      where: {
+        email: user.data?.email,
+        username: user.data?.username,
+      },
+    });
 
-   if (existingUser?.email) {
-    return res.status(400).json("User email already exists.");
-  }
-  if (existingUser?.username) {
-    return res.status(400).json("Username already exists.");
-  }
+    if (existingUser?.email) {
+      return res.status(400).json("User email already exists.");
+    }
+    if (existingUser?.username) {
+      return res.status(400).json("Username already exists.");
+    }
 
-  const encryptedpassword = await bcrypt.hash(user.data?.password!, 10);
+    const encryptedpassword = await bcrypt.hash(user.data?.password!, 10);
 
-  const response = await prisma.user.create({
-    data: {
-      username: user.data?.username,
-      email: user.data?.email,
-      password: encryptedpassword,
-    },
-  });
+    const response = await prisma.user.create({
+      data: {
+        username: user.data?.username,
+        email: user.data?.email,
+        password: encryptedpassword,
+      },
+    });
 
-  
-
-  res.status(200).json({ message: "User created successfully", response: response });
-} catch (error) {
+    res
+      .status(200)
+      .json({ message: "User created successfully", response: response });
+  } catch (error) {
     res.status(500).json({ error: "Failed to create user" });
-}
-  
-
- 
+  }
 });
 
 router.post("/signin", async (req, res) => {

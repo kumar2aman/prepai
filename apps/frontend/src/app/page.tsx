@@ -1,9 +1,10 @@
 import React from 'react'
 import AudioLive from './components/audioLive'
 
+
 function page() {
   return (
-    <AudioLive />
+  <AudioLive />
   )
 }
 
