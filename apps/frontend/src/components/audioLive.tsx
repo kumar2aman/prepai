@@ -2,9 +2,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { getEphemeralToken } from "../lib/ephemeralToken";
-import { startGeminiSession } from "../lib/geminiLiveService";
-import { recordAudioAndConvert } from "../lib/mediaRecorder";
+import { getEphemeralToken } from "../app/lib/ephemeralToken";
+import { startGeminiSession } from "../app/lib/geminiLiveService";
+import { recordAudioAndConvert } from "../app/lib/mediaRecorder";
 
 
 export default function AudioLive() {
