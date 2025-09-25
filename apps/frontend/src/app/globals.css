@@ -5,4 +5,12 @@
   --font-love:"Love Ya Like A Sister", 'cursive';
   --font-open:"Open Sans", 'sans-serif';
   --font-ubuntu:"Ubuntu", 'sans-serif';
+
+
+}
+
+
+
+.gradient-blue {
+background-image: linear-gradient(to right, #5433FF, #20BDFF, #A5FECB);
 }

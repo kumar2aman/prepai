@@ -3,6 +3,7 @@ import Navbar from "./navbar";
 import Hero from "./hero";
 import HowItWorks from "./howItWorks";
 import Features from "./features";
+import GetStarted from "./getStarted";
 
 function Homepage() {
   return (
@@ -11,6 +12,7 @@ function Homepage() {
       <Hero />
       <HowItWorks/>
       <Features/>
+      <GetStarted/>
     </>
   );
 }

@@ -10,7 +10,7 @@ function Features() {
       <div className="flex flex-col justify-center items-center w-full mt-24 ">
         <h1 className="font-ubuntu font-medium text-center text-6xl mb-12">
           Why Choose{" "}
-          <span className="bg-gradient-to-r from-[#5433FF] via-[#20BDFF] to-[#A5FECB] text-transparent bg-clip-text">
+          <span className="gradient-blue  text-transparent bg-clip-text">
             PrepAi
           </span>
         </h1>
@@ -32,7 +32,7 @@ function Features() {
                 >
                   {feature.icon}
                 </div>
-                <h3 className="text-l font-ubuntu font-semibold mb-3 text-white">
+                <h3 className="text-xl font-ubuntu font-semibold mb-3 text-white">
                   {feature.title}
                 </h3>
                 <p className="font-open text-gray-300 leading-relaxed">
