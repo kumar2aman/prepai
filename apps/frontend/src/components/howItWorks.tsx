@@ -10,9 +10,10 @@ function HowItWorks() {
                 How <span className='gradient-blue  text-transparent bg-clip-text'>PrepAi</span>  Works 
               
             </h1>
-            <Button size={"xl"} variant={'outline'} className='w-42 mt-12 font-sans text-2xl hover:bg-gray-900'>
+            <Button size={"xl"} variant={'outline'} className='w-42 mt-12 mb-7 font-sans text-2xl hover:bg-gray-900'>
                 Play <Play className='size-xl text-orange-400'/>
             </Button>
+            <h1 className='font-sans text-xl font-semibold  text-red-500'>Coming Soon !!</h1>
         </div>
     </div>
   )

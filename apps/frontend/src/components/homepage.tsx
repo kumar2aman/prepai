@@ -4,6 +4,7 @@ import Hero from "./hero";
 import HowItWorks from "./howItWorks";
 import Features from "./features";
 import GetStarted from "./getStarted";
+import CtaSection from "./ctaSection";
 
 function Homepage() {
   return (
@@ -13,6 +14,7 @@ function Homepage() {
       <HowItWorks/>
       <Features/>
       <GetStarted/>
+      <CtaSection/>
     </>
   );
 }

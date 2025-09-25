@@ -23,7 +23,7 @@ function GetStarted() {
                 <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-orange-500/50 to-transparent" />
               )}
               
-              <div className="relative z-10 w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[#FF512F] to-[#F09819] rounded-full flex items-center justify-center text-2xl  font-bold">
+              <div className="relative z-10 w-16 h-16 mx-auto mb-6 gradient-orange  rounded-full flex items-center justify-center text-2xl  font-bold">
                 {step.step}
               </div>
               

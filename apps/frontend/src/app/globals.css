@@ -14,3 +14,9 @@
 .gradient-blue {
 background-image: linear-gradient(to right, #5433FF, #20BDFF, #A5FECB);
 }
+
+
+
+.gradient-orange {
+background-image: linear-gradient(to right,#FF512F, #F09819);
+}

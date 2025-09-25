@@ -16,7 +16,7 @@ function Hero() {
 
         {/* Headline */}
         <h1 className="text-5xl md:text-7xl font-love mb-6 leading-tight text-center">
-          Master Your <span className="font-love bg-gradient-to-r from-[#FF512F] to-[#F09819] bg-clip-text text-transparent">Interview Skills</span>
+          Master Your <span className="font-love gradient-orange  bg-clip-text text-transparent">Interview Skills</span>
           <br />
           With AI
         </h1>
