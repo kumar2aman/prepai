@@ -5,6 +5,7 @@ import HowItWorks from "./howItWorks";
 import Features from "./features";
 import GetStarted from "./getStarted";
 import CtaSection from "./ctaSection";
+import Footer from "./footer";
 
 function Homepage() {
   return (
@@ -15,6 +16,7 @@ function Homepage() {
       <Features/>
       <GetStarted/>
       <CtaSection/>
+      <Footer/>
     </>
   );
 }
