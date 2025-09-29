@@ -1,6 +1,5 @@
 import Content from "./dashboard/content";
 import Sidebar from "./dashboard/sidebar";
-import Progress from "./dashboard/progress";
 
 function Dashboard() {
   return (
@@ -10,9 +9,8 @@ function Dashboard() {
           <Sidebar />
         </div>
 
-        <div className="w-full mx-4">
+        <div className="w-full mx-12">
           <Content />
-          <Progress/>
         </div>
       </div>
     </>
