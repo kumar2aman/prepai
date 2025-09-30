@@ -2,7 +2,7 @@ import React from 'react'
 
 function Sidebar() {
   return (
-     <div className="border-r border-orange-400/40">
+     <div className="border-r  border-orange-400/40">
         <aside className="w-60 min-h-screen text-white p-4 flex flex-col justify-between">
           <div>
             <h1 className="text-2xl font-bold gradient-blue bg-clip-text text-transparent  mb-8">PrepAI</h1>

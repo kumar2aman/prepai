@@ -13,7 +13,7 @@ function Content() {
           <Button className="bg-orange-400">Alex</Button>
         </div>
       </div>
-      <Progress/>
+     
     </>
   );
 }
