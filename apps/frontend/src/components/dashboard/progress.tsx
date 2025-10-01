@@ -15,7 +15,7 @@ function Progress() {
     
     <div className="flex items-start gap-x-6 text-white ">
       {/* Progress Card (60vw) */}
-      <Card className="flex flex-col  border-orange-300/40 h-[40vh] w-[60vw] py-6 px-6 gap-12 ">
+      <Card className="flex flex-col  h-[40vh] w-[60vw] py-6 px-6 gap-12 ">
         {/* Header */}
         <CardHeader className="flex justify-between items-center pr-6">
           <CardTitle className="font-ubuntu text-3xl ">Your Progress</CardTitle>

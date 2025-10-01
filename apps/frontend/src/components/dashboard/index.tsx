@@ -6,7 +6,7 @@ import Stats from "./stats";
 
 function Dashboard() {
   return (
-    <div className="flex min-h-screen overflow-hidden bg-black text-white">
+    <div className="flex  text-white">
       {/* Sidebar with fixed width */}
       <div className="w-64 h-full fixed left-0 top-0 border-r border-orange-300/20  z-10">
         <Sidebar />

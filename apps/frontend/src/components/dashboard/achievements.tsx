@@ -4,7 +4,7 @@ import { Star, TicketCheck, Trophy } from "lucide-react";
 
 function Achievements() {
   return (
-    <Card className="border border-orange-300/40 h-[40vh] w-[40vw] py-6 px-6 ">
+    <Card className=" h-[40vh] w-[40vw] py-6 px-6 ">
       {/* Header */}
       <CardHeader className="flex justify-between items-center pr-6 mb-4">
         <CardTitle className="font-ubuntu text-3xl">Achievements</CardTitle>
