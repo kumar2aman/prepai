@@ -4,8 +4,8 @@ import Leadarboard from "./leadarboard";
 
 function Session() {
   return (
-    <div className="flex justify-between ">
-      <Card className=" p-6 border rounded-xl w-[60vw] h-[40vh] ">
+    <div className="flex justify-between gap-x-6 ">
+      <Card className=" p-6 border rounded-xl w-full h-[40vh] ">
         <div className="mb-10">
           <h3 className="text-3xl font-semibold mb-6">Recent Sessions</h3>
           <div className="space-y-3">

@@ -20,3 +20,14 @@ background-image: linear-gradient(to right, #5433FF, #20BDFF, #A5FECB);
 .gradient-orange {
 background-image: linear-gradient(to right,#FF512F, #F09819);
 }
+
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For IE and Edge */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
