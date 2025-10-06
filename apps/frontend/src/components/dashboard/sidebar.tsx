@@ -1,14 +1,18 @@
+"use client"
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 function Sidebar() {
+
+  const router = useRouter()
   return (
-    <div className="border-r border-orange-400/40 hidden md:block">
+    <div className="border-r border-orange-400/40 hidden  md:block">
       <aside className="w-64 min-h-screen text-white p-4 flex flex-col justify-between">
         <div>
           <h1 className="text-2xl font-bold gradient-blue bg-clip-text text-transparent mb-8">PrepAI</h1>
           <nav className="space-y-4">
             <button className="w-full text-left px-4 py-2 gradient-orange rounded-md font-semibold">Dashboard</button>
-            <button className="w-full text-left px-4 py-2 hover:bg-gray-800 rounded-md">Practice</button>
+            <button onClick={()=>{router.push("/chat")}} className="w-full text-left px-4 py-2 cursor-pointer hover:bg-gray-800 rounded-md ">Practice</button>
             <button className="w-full text-left px-4 py-2 hover:bg-gray-800 rounded-md">Feedback</button>
             <button className="w-full text-left px-4 py-2 hover:bg-gray-800 rounded-md">Settings</button>
           </nav>
