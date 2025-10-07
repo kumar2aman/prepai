@@ -21,7 +21,7 @@ app.use(
 
 app.use("/api/v1", router);
 
-app.use("api/v1/auth", authRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.listen(3001, () => {
   console.log("Server is running on port 3001");

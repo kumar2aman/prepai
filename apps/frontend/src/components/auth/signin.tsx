@@ -112,7 +112,7 @@ function Signin() {
                 disabled={loading}
                 className="w-full py-3 font-bold text-black bg-orange-500 rounded-lg hover:bg-orange-600 transition-colors disabled:bg-orange-800 disabled:cursor-not-allowed"
               >
-                {loading ? "Creating Account..." : "Create Account"}
+                {loading ? "Logging in..." : "Login"}
               </button>
             </form>
 

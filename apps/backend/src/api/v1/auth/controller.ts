@@ -5,20 +5,23 @@ import prisma from "../../../db.js";
 import jwt from "jsonwebtoken";
 import { signinSchema, signupSchema } from "../../../types/schema.js";
 
-const app = express();
-
-app.use(express.json());
 
 const router: Router = Router();
 
+router.use(express.json());
+
 router.post("/signup", async (req, res) => {
+
+  console.log("signup endpoint called!");
   const user = signupSchema.safeParse(req.body);
+
+   console.log(user);
 
   if (!user.success) {
     return res.status(400).json({ error: "No user data received." });
   }
   try {
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.user.findFirst({
       where: {
         email: user.data?.email,
         username: user.data?.username,

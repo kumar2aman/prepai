@@ -39,7 +39,7 @@ function Signup() {
 
       console.log("Signup successful:", response.data);
       // Handle success - e.g., redirect to login page or dashboard
-     router.push("/signin")
+     router.push("auth/signin")
     } catch (err) {
       console.error("Signup failed:", err);
       // Set a user-friendly error message
@@ -68,13 +68,13 @@ function Signup() {
             <form onSubmit={handleSignup} className="space-y-4">
               <div>
                 <label htmlFor="username" className="sr-only">
-                  Email
+                  Username
                 </label>
                 <input
                   type="username"
                   id="username"
                   placeholder="Username"
-                  value={email}
+                  value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full px-4 py-3 bg-black border border-gray-700 rounded-lg focus:ring-orange-500 focus:border-orange-500 transition-colors"
                   required

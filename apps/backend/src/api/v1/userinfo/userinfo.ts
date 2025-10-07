@@ -1,22 +1,26 @@
-import { Router } from "express"
+import { Router } from "express";
 import { authMiddleware } from "../../../auth-middelware.js";
 import prisma from "../../../db.js";
 
-
-
-const router:Router = Router();
-
+const router: Router = Router();
 
 router.get("/", authMiddleware, async (req, res) => {
 
-    try {
+    console.log("userinfo endpoint called!");
 
-         if (!req.userId) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
+    console.log("userId",req.userId);
+
+
+  
 
     const userId = req.userId;
 
+    if (!userId) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+  try {
+    
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -29,14 +33,9 @@ router.get("/", authMiddleware, async (req, res) => {
 
     res.status(200).json(user);
 
-        
-    } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
-    }
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
 
-   
-    
-  });
-  
-  export { router as userinfoRouter };
-
+export { router as userinfoRouter };
