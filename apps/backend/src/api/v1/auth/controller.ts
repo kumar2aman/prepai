@@ -12,7 +12,6 @@ app.use(express.json());
 const router: Router = Router();
 
 router.post("/signup", async (req, res) => {
-
   const user = signupSchema.safeParse(req.body);
 
   if (!user.success) {
