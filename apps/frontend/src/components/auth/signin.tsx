@@ -34,12 +34,12 @@ function Signin() {
          
           email,
           password,
+        },{
+            withCredentials: true,
         }
       );
 
       console.log("Signup successful:", response.data);
-
-      localStorage.setItem("token", response.data.token);
       // Handle success - e.g., redirect to login page or dashboard
      router.push("/dashboard")
     } catch (err) {

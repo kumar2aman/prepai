@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { Router } from "express";
 import express from "express";
 import bcrypt from "bcryptjs";
@@ -85,7 +86,29 @@ router.post("/signin", async (req, res) => {
     expiresIn: "2d",
   });
 
-  res.status(200).json({ token });
+  res.cookie("token", token,{
+    httpOnly: true, // prevent client-side access
+   secure: process.env.NODE_ENV === "production",// only send over production
+    sameSite: "strict", // protect against CSRF
+    maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
+    path: "/", // set the cookie for the entire domain
+  });
+
+  res.status(200).json({ message: "Login successful"});
+});
+
+
+
+console.log("secre", process.env.NODE_ENV === "production");
+
+router.post("/logout", async (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    path: "/",
+  });
+  res.status(200).json({ message: "Logout successful" });
 });
 
 export { router as authRouter };

@@ -15,9 +15,7 @@ function Dashboard() {
         const response = await axios.get(
           "http://localhost:3001/api/v1/userinfo",
           {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
+            withCredentials: true,
           }
         );
 
@@ -30,9 +28,8 @@ function Dashboard() {
         console.error("Error fetching user data:", error);
       }
     };
-     
-    userData();
 
+    userData();
   }, []);
 
   console.log("Username:", username);
@@ -46,7 +43,7 @@ function Dashboard() {
 
       {/* Main content */}
       <div className="md: w-full h-screen overflow-y-auto px-4 md:px-8 py-6 space-y-6">
-        <Content username={username}  />
+        <Content username={username} />
         <Progress />
         <Stats />
         <Session />

@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { GoogleGenAI } from "@google/genai";
 import { Router } from "express";
-import { authMiddleware } from "../../auth-middelware.js";
+import { authMiddleware } from "../../auth-middleware.js";
 
 const router: Router = Router();
 
