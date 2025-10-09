@@ -15,7 +15,7 @@ export async function recordAudioAndConvert(): Promise<string | null> {
         const audioBlob = new Blob(chunks, { type: "audio/webm" });
         try {
           const res = await axios.post(
-            "http://localhost:3001/api/convertAudio",
+            "http://localhost:3001/api/v1/convertAudio",
             audioBlob,
             {
               headers: { "Content-Type": "audio/webm" },

@@ -14,7 +14,7 @@ function Content({ username }: any) {
     try {
       // Call the backend to clear the cookie
 
-      await axios.post("http://localhost:3001/api/v1/auth/logout",{
+      await axios.post("http://localhost:3001/api/v1/auth/logout",null,{
         withCredentials: true,
       });
 

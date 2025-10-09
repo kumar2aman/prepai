@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { webmToPCM } from "../../utils/createRawPcm.js";
+import { convertToText } from "../../utils/convertstt.js";
 
 const router: Router = Router();
 
@@ -15,7 +16,11 @@ router.post("/", async (req, res) => {
 
   const pcmBuffer = await webmToPCM(rawAudio);
 
-  res.status(200).send(pcmBuffer);
+  if (pcmBuffer) {
+    res.status(200).send(pcmBuffer);
+  }
+
+  convertToText(rawAudio);
 });
 
 export { router as convertAudioRouter };
