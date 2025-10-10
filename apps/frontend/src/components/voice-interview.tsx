@@ -1,8 +1,8 @@
 'use client';
 
-import { getEphemeralToken } from '@/app/lib/ephemeralToken';
-import { startGeminiSession } from '@/app/lib/geminiLiveService';
-import { recordAudioAndConvert } from '@/app/lib/mediaRecorder';
+import { getEphemeralToken } from '@/lib/ephemeralToken';
+import { startGeminiSession } from '@/lib/geminiLiveService';
+import { recordAudioAndConvert } from '@/lib/mediaRecorder';
 import { AudioLines, Mic, StopCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
 

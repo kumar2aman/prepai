@@ -13,16 +13,30 @@ export async function recordAudioAndConvert(): Promise<string | null> {
     return new Promise((resolve, reject) => {
       recorder.onstop = async () => {
         const audioBlob = new Blob(chunks, { type: "audio/webm" });
+
+        const audioBuffer = await audioBlob.arrayBuffer();
+
+        const base64Audio = Buffer.from(audioBuffer).toString("base64");
+
+        const payload = {
+          audio: {
+            data: base64Audio,
+            mimeType: "audio/webm",
+          },
+        };
+
         try {
           const res = await axios.post(
             "http://localhost:3001/api/v1/convertAudio",
-            audioBlob,
+            payload,
             {
-              headers: { "Content-Type": "audio/webm" },
+              headers: { "Content-Type": "application/json" },
               responseType: "arraybuffer",
             }
           );
-          const base64Pcm = Buffer.from(new Uint8Array(res.data)).toString("base64");
+          const base64Pcm = Buffer.from(new Uint8Array(res.data)).toString(
+            "base64"
+          );
           resolve(base64Pcm);
         } catch (error) {
           console.error("Audio conversion failed:", error);
