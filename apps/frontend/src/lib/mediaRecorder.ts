@@ -21,7 +21,7 @@ export async function recordAudioAndConvert(): Promise<string | null> {
         const payload = {
           audio: {
             data: base64Audio,
-            mimeType: "audio/webm",
+            mimeType: "audio/webm; rate=16000; channels=1; ",
           },
         };
 

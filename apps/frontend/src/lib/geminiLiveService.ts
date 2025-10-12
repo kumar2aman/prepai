@@ -3,6 +3,7 @@ import { Prompt } from "../app/config/prompt";
 import axios from "axios";
 
 let nextPlaybackTime = 0;
+let turnCounter = 1;
 const audioContext = new AudioContext({ sampleRate: 24000 });
 
 export async function startGeminiSession(
@@ -11,8 +12,7 @@ export async function startGeminiSession(
 ) {
   onStatusChange("🔗 Connecting to Gemini...");
 
-  // --- NEW (Step 1): Create an array to store the raw audio chunks ---
-  let allAudioChunks: Uint8Array[] = [];
+  let currentTurnChunks: Uint8Array[] = [];
 
   const ai = new GoogleGenAI({
     apiKey: token,
@@ -27,87 +27,79 @@ export async function startGeminiSession(
     },
     callbacks: {
       onopen: () => onStatusChange("🔌 Connected"),
+
       onmessage: async (msg) => {
         if (msg.data) {
-          const base64 = msg.data;
-          const byteArray = Uint8Array.from(atob(base64), (c) =>
+          const byteArray = Uint8Array.from(atob(msg.data), (c) =>
             c.charCodeAt(0)
           );
 
-          // --- NEW (Step 2): Push the raw byte chunk into our array ---
-          allAudioChunks.push(byteArray);
+          currentTurnChunks.push(byteArray); // ✅ Gather audio for this turn
 
-          // The original real-time playback logic remains the same
+          // Real-time playback
           const int16Array = new Int16Array(byteArray.buffer);
           const float32Array = new Float32Array(int16Array.length);
           for (let i = 0; i < int16Array.length; i++) {
             float32Array[i] = int16Array[i] / 32768;
           }
-          const audioBuffer = audioContext.createBuffer(
-            1,
-            float32Array.length,
-            24000
-          );
+
+          const audioBuffer = audioContext.createBuffer(1, float32Array.length, 24000);
           audioBuffer.copyToChannel(float32Array, 0);
           const source = audioContext.createBufferSource();
           source.buffer = audioBuffer;
           source.connect(audioContext.destination);
-          const startTime = Math.max(
-            audioContext.currentTime,
-            nextPlaybackTime
-          );
+          const startTime = Math.max(audioContext.currentTime, nextPlaybackTime);
           source.start(startTime);
           nextPlaybackTime = startTime + audioBuffer.duration;
         }
 
-        // --- MODIFIED (Step 3): Detect the end of the turn ---
         if (msg.serverContent?.turnComplete) {
-          console.log(
-            "✅ Turn complete. Processing all stored audio chunks..."
-          );
+          console.log("✅ Turn complete. Processing all stored audio chunks...");
+          console.log(`🔹 Received ${currentTurnChunks.length} chunks for Turn #${turnCounter}`);
 
-          if (allAudioChunks.length > 0) {
-            // --- NEW (Step 4): Concatenate all chunks into a single Uint8Array ---
-            const totalLength = allAudioChunks.reduce(
-              (acc, value) => acc + value.length,
-              0
-            );
+          if (currentTurnChunks.length > 0) {
+            const totalLength = currentTurnChunks.reduce((acc, value) => acc + value.length, 0);
             const fullAudioData = new Uint8Array(totalLength);
 
             let offset = 0;
-            for (const chunk of allAudioChunks) {
+            for (const chunk of currentTurnChunks) {
               fullAudioData.set(chunk, offset);
               offset += chunk.length;
             }
 
-            const audioBase64 = Buffer.from(fullAudioData).toString("base64");
+            console.log(`🎯 Turn #${turnCounter}: audio length = ${fullAudioData.length}`);
+            turnCounter++;
+
+            const base64Audio = Buffer.from(fullAudioData).toString("base64");
 
             const payload = {
               audio: {
-                data: audioBase64,
-                mimeType: "audio/raw; encoding=signed-integer; rate=24000 ",
+                data: base64Audio,
+                mimeType: "audio/raw; encoding=signed-integer; channels=1; rate=24000",
               },
             };
 
-            const res = await axios.post(
-              "http://localhost:3001/api/v1/convertAudio",
-              payload,
-              {
+            try {
+              await axios.post("http://localhost:3001/api/v1/geminiAudio", payload, {
                 headers: { "Content-Type": "application/json" },
                 responseType: "arraybuffer",
-              }
-            );
+              });
 
-            console.log("Full audio data assembled:", fullAudioData.length);
+              console.log("✅ Audio sent for transcription");
+            } catch (err) {
+              console.error("❌ Failed to send audio:", err);
+            }
           }
-          console.log("Resetting audio chunks for the next turn.");
-          allAudioChunks = [];
+
+          currentTurnChunks = []; // 🔄 Reset
         }
       },
+
       onerror: (err) => {
         console.error("Error:", err);
         onStatusChange("❌ Disconnected");
       },
+
       onclose: () => onStatusChange("❌ Disconnected"),
     },
   });

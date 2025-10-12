@@ -3,6 +3,7 @@
 import { getEphemeralToken } from '@/lib/ephemeralToken';
 import { startGeminiSession } from '@/lib/geminiLiveService';
 import { recordAudioAndConvert } from '@/lib/mediaRecorder';
+import axios from 'axios';
 import { AudioLines, Mic, StopCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
 
@@ -45,6 +46,23 @@ export default function VoiceInterviewPage() {
      }
    }
 
+
+    async   function handlestopSession() {
+        try {
+         
+          const response = await axios.get(
+            "http://localhost:3001/api/v1/chatHistory",
+            {
+              withCredentials: true,
+            }
+          );
+          console.log("Chat history:", response.data);
+        } catch (error) {
+          console.error("Error fetching chat history:", error);
+        }
+       }
+
+
   return (
     <main className="min-h-screen bg-black flex flex-col items-center justify-center text-white relative overflow-hidden">
       {/* Glowing Circle */}
@@ -74,7 +92,7 @@ export default function VoiceInterviewPage() {
 
         {/* Stop Button */}
         <button
-        
+             onClick={handlestopSession}
           className="p-4 rounded-full border border-red-500 text-red-500 hover:bg-red-900 transition-all"
         >
           <StopCircle size={20} />
