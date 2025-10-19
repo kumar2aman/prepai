@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { Router } from "express";
-import express from "express";
+
 import bcrypt from "bcryptjs";
 import prisma from "../../../db.js";
 import jwt from "jsonwebtoken";
@@ -9,14 +9,13 @@ import { signinSchema, signupSchema } from "../../../types/schema.js";
 
 const router: Router = Router();
 
-router.use(express.json());
 
 router.post("/signup", async (req, res) => {
 
-  console.log("signup endpoint called!");
+ 
   const user = signupSchema.safeParse(req.body);
 
-   console.log(user);
+   
 
   if (!user.success) {
     return res.status(400).json({ error: "No user data received." });
@@ -99,7 +98,7 @@ router.post("/signin", async (req, res) => {
 
 
 
-console.log("secre", process.env.NODE_ENV === "production");
+
 
 router.post("/logout", async (req, res) => {
   res.clearCookie("token", {
