@@ -5,22 +5,13 @@ import prisma from "../../../db.js";
 const router: Router = Router();
 
 router.get("/", authMiddleware, async (req, res) => {
+  const userId = req.userId;
 
-    console.log("userinfo endpoint called!");
-
-    console.log("userId",req.userId);
-
-
-  
-
-    const userId = req.userId;
-
-    if (!userId) {
-      return res.status(401).json({ error: "Unauthorized" });
-    }
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
 
   try {
-    
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -32,7 +23,6 @@ router.get("/", authMiddleware, async (req, res) => {
     }
 
     res.status(200).json(user);
-
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }
