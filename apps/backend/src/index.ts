@@ -6,6 +6,7 @@ import { authRouter } from "./api/v1/auth/controller.js";
 import cookiesParser from "cookie-parser";
 
 const app = express();
+app.use(express.json());
 
 app.use(
   express.raw({
