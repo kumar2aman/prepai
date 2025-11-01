@@ -6,16 +6,12 @@ import prisma from "../../../db.js";
 import jwt from "jsonwebtoken";
 import { signinSchema, signupSchema } from "../../../types/schema.js";
 
-
 const router: Router = Router();
 
-
 router.post("/signup", async (req, res) => {
-
- 
   const user = signupSchema.safeParse(req.body);
 
-   
+
 
   if (!user.success) {
     return res.status(400).json({ error: "No user data received." });
@@ -85,20 +81,16 @@ router.post("/signin", async (req, res) => {
     expiresIn: "2d",
   });
 
-  res.cookie("token", token,{
+  res.cookie("token", token, {
     httpOnly: true, // prevent client-side access
-   secure: process.env.NODE_ENV === "production",// only send over production
+    secure: process.env.NODE_ENV === "production", // only send over production
     sameSite: "strict", // protect against CSRF
     maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
     path: "/", // set the cookie for the entire domain
   });
 
-  res.status(200).json({ message: "Login successful"});
+  res.status(200).json({ message: "Login successful" });
 });
-
-
-
-
 
 router.post("/logout", async (req, res) => {
   res.clearCookie("token", {
