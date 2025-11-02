@@ -39,15 +39,15 @@ function Signin() {
         }
       );
 
-      console.log("Signup successful:", response.data);
+      console.log("Signin successful:", response.data);
       // Handle success - e.g., redirect to login page or dashboard
      router.push("/dashboard")
     } catch (err) {
-      console.error("Signup failed:", err);
+      console.error("Signin failed:", err);
       // Set a user-friendly error message
       if (axios.isAxiosError(err) && err.response) {
         setError(
-          err.response.data.message || "An error occurred during signup."
+          err.response.data.message || "An error occurred during signin."
         );
       } else {
         setError("An unknown error occurred. Please try again.");
