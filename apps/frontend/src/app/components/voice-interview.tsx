@@ -2,10 +2,11 @@
 
 import { getEphemeralToken } from '@/lib/ephemeralToken';
 import { startGeminiSession } from '@/lib/geminiLiveService';
-import { startRecording, stopRecording, isRecording } from '@/lib/mediaRecorder';
+
 import axios from 'axios';
 import { AudioLines, Mic, StopCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { cancelRecording, startRecording, stopRecording } from '../lib/mediaRecorder';
 
 export default function VoiceInterviewPage() {
   const [status, setStatus] = useState("");
@@ -76,7 +77,7 @@ export default function VoiceInterviewPage() {
       if (recording) {
         setRecording(false);
         // Cancel ongoing recording
-        const { cancelRecording } = await import('@/lib/mediaRecorder');
+       
         cancelRecording();
       }
 
