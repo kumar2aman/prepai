@@ -1,5 +1,5 @@
 
-import Signin from '@/components/auth/signin'
+import Signin from '@/app/components/auth/signin'
 import React from 'react'
 
 function Page() {

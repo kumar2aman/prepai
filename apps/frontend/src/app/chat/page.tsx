@@ -1,6 +1,7 @@
-import VoiceInterviewPage from '@/components/voice-interview'
+
 
 import React from 'react'
+import VoiceInterviewPage from '../components/voice-interview'
 
 function Page() {
   return (

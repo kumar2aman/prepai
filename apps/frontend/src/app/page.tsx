@@ -1,5 +1,6 @@
-import Homepage from "../components/homepage";
-import Background from "@/components/background";
+import Background from "./components/background";
+import Homepage from "./components/homepage";
+
 
 function page() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getStartedData } from '@/lib/getStartedData'
+import { getStartedData } from '@/app/lib/getStartedData'
 
 function GetStarted() {
 

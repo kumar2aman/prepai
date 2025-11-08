@@ -1,12 +1,15 @@
 'use client';
 
-import { getEphemeralToken } from '@/lib/ephemeralToken';
-import { startGeminiSession } from '@/lib/geminiLiveService';
+
+
 
 import axios from 'axios';
 import { AudioLines, Mic, StopCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { getEphemeralToken } from '../lib/ephemeralToken';
+import { startGeminiSession } from '../lib/geminiLiveService';
 import { cancelRecording, startRecording, stopRecording } from '../lib/mediaRecorder';
+
 
 export default function VoiceInterviewPage() {
   const [status, setStatus] = useState("");

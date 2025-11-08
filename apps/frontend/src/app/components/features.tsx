@@ -1,4 +1,4 @@
-import { features } from "@/lib/featuresData";
+import { features } from "@/app/lib/featuresData";
 import React from "react";
 import { Card, CardContent } from "./ui/card";
 
