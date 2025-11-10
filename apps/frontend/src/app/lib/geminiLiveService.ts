@@ -80,7 +80,9 @@ export async function startGeminiSession(
             };
 
             try {
-              await axios.post("http://localhost:3001/api/v1/geminiAudio", payload, {
+              await axios.post("http://localhost:3001/api/v1/geminiAudio", 
+                payload, 
+                {
                 headers: { "Content-Type": "application/json" },
                 responseType: "arraybuffer",
               });
