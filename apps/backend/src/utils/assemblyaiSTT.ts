@@ -13,10 +13,9 @@ const client = new AssemblyAI({
 
 interface Audio {
   data: string;
-  mimeType: string;
 }
 
-export async function convertToText(audio: Audio): Promise<string> {
+export async function convertToText(audio : Audio): Promise<string> {
   const startTime = Date.now();
   let tempPath = "";
 
@@ -35,6 +34,7 @@ export async function convertToText(audio: Audio): Promise<string> {
     const transcript = await client.transcripts.transcribe({
       audio: tempPath,
       language_code: "en",
+      
     });
 
     const duration = Date.now() - startTime;
