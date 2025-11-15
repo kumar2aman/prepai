@@ -10,7 +10,7 @@ export function enqueue(chunk: string) {
 }
 
 async function processQueue() {
-  isProcessing = true;
+ 
   while (queue.length > 0) {
     const chunk = queue.shift();
     if (!chunk) return "chunk is undefined";
@@ -18,5 +18,4 @@ async function processQueue() {
     if(!response) return "response is undefined";
     return response;
   }
-  isProcessing = false;
 }
