@@ -1,21 +1,28 @@
 import { convertToText } from "../utils/assemblyaiSTT.js";
 
-const queue: string[] = [];
-
+const queue: { chunk: string, resolve: Function }[] = [];
 let isProcessing = false;
 
-export function enqueue(chunk: string) {
-  queue.push(chunk);
-  if (!isProcessing) return processQueue();
+export function enqueue(chunk: string): Promise<string> {
+  return new Promise((resolve) => {
+    queue.push({ chunk, resolve });
+    if (!isProcessing) processQueue();
+  });
 }
 
 async function processQueue() {
- 
+  isProcessing = true;
+
   while (queue.length > 0) {
-    const chunk = queue.shift();
-    if (!chunk) return "chunk is undefined";
-    const response = await convertToText({ data: chunk }); // await ensures no overlap
-    if(!response) return "response is undefined";
-    return response;
+    const { chunk, resolve } = queue.shift()!;
+
+    try {
+      const response = await convertToText({ data: chunk });
+      resolve(response);
+    } catch (err) {
+      resolve("");
+    }
   }
+
+  isProcessing = false;
 }
