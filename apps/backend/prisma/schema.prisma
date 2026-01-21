@@ -19,6 +19,7 @@ model User {
   email    String     @unique
   password String
   userdata UserData[]
+  session  Session[]
 }
 
 model UserData {
@@ -31,7 +32,7 @@ model UserData {
   achievements Int
   user         User   @relation(fields: [userId], references: [id])
   userId       String
-  session      Session[]
+  
 }
 
 model Session {
@@ -39,6 +40,6 @@ model Session {
   name          String
   totalSession  Int
   createdAt     DateTime @default(now())
-  user          UserData?  @relation(fields: [userId], references: [id])
-  userId        String?
+  user          User @relation(fields: [userId], references: [id])
+  userId        String
 }
