@@ -11,8 +11,6 @@ const router: Router = Router();
 router.post("/signup", async (req, res) => {
   const user = signupSchema.safeParse(req.body);
 
-
-
   if (!user.success) {
     return res.status(400).json({ error: "No user data received." });
   }
