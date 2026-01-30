@@ -1,44 +1,43 @@
-import { Download, Trash2 } from "lucide-react";
-import React, { useState } from "react";
+import { LogOut } from "lucide-react";
+import React from "react";
 import { Button } from "../ui/button";
-import Progress from "./progress";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
 function Content({ username }: any) {
   const router = useRouter();
 
-
-
   const logouthandler = async () => {
     try {
-      // Call the backend to clear the cookie
-
-      await axios.post("http://localhost:3001/api/v1/auth/logout",null,{
+      await axios.post("http://localhost:3001/api/v1/auth/logout", null, {
         withCredentials: true,
       });
-
       router.push("/");
     } catch (error) {
       console.error("Failed to log out:", error);
     }
   };
 
-  console.log("username", username);
   return (
-    <>
-      <div className="flex justify-between   items-start mt-4 mb-6 px-4 text-white">
-        <h2 className="text-2xl font-bold">Welcome back, {username}</h2>
+    <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto px-6 py-8">
+      {/* Header Section */}
+      <div className="flex justify-between items-center bg-white/5 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xl">
         <div>
-          <Button
-            onClick={logouthandler}
-            className="bg-orange-400 cursor-pointer"
-          >
-            log out
-          </Button>
+          <h2 className="text-3xl font-bold font-love tracking-wide text-white">
+            Welcome back, <span className="gradient-blue bg-clip-text text-transparent">{username}</span>
+          </h2>
+          <p className="text-gray-400 mt-1 font-ubuntu text-sm">Ready to master your next interview?</p>
         </div>
+        
+        <Button
+          onClick={logouthandler}
+          variant="outline"
+          className="border-red-500/20 text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all font-ubuntu"
+        >
+          <LogOut className="w-4 h-4 mr-2" /> Log Out
+        </Button>
       </div>
-    </>
+    </div>
   );
 }
 
