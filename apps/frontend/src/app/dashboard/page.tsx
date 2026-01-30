@@ -5,13 +5,16 @@ import React from "react";
 
 function Page() {
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Main Dashboard */}
-      <Dashboard />
+    <div className="min-h-screen bg-black text-white selection:bg-blue-500/30 font-sans">
+      {/* Background Ambience */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-900/10 rounded-full blur-[120px]" />
+      </div>
 
-      {/* Decorative Blur Elements */}
-      <div className="absolute bottom-0 right-0 w-48 h-48 bg-teal-600 blur-3xl opacity-30 rounded-full z-0" />
-      <div className="absolute top-0 left-0 w-48 h-48 bg-green-600 blur-3xl opacity-20 rounded-full z-0" />
+      <div className="relative z-10">
+        <Dashboard />
+      </div>
     </div>
   );
 }
