@@ -1,9 +1,15 @@
 "use client";
 
 import Dashboard from "@/app/components/dashboard";
-import React from "react";
+import React, { useContext } from "react";
+import { useDashboard } from "./dashboardProvider";
 
 function Page() {
+
+const data = useDashboard()
+
+
+
   return (
     <div className="min-h-screen bg-black text-white selection:bg-blue-500/30 font-sans">
       {/* Background Ambience */}
@@ -13,7 +19,8 @@ function Page() {
       </div>
 
       <div className="relative z-10">
-        <Dashboard />
+        
+        <Dashboard data = {data} />
       </div>
     </div>
   );
