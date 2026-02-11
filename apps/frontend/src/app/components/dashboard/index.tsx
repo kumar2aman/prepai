@@ -5,15 +5,21 @@ import Session from "./session";
 import Sidebar from "./sidebar";
 import Stats from "./stats";
 import axios from "axios";
+import { DashboardData } from "@/app/dashboard/dashboardProvider";
 
-function Dashboard() {
+
+interface DashboardProp {
+data: DashboardData
+}
+
+function Dashboard( {data}:DashboardProp) {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
     const userData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/v1/userinfo",
+          "http://localhost:3001/api/v1/user",
           {
             withCredentials: true,
           }
@@ -32,7 +38,7 @@ function Dashboard() {
     userData();
   }, []);
 
-  console.log("Username:", username);
+ 
 
   return (
     <div className="flex flex-col md:flex-row text-white">
@@ -44,7 +50,7 @@ function Dashboard() {
       {/* Main content */}
       <div className="md: w-full h-screen overflow-y-auto px-4 md:px-8 py-6 space-y-6">
         <Content username={username} />
-        <Progress />
+        <Progress data = {data} />
         <Stats />
         <Session />
       </div>

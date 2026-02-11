@@ -4,7 +4,9 @@ import Achievements from "./achievements";
 import { Activity, Target, Zap } from "lucide-react";
 
 
-function Progress() {
+function Progress({data}: any) {
+
+
   return (
     <div className="flex flex-col lg:flex-row gap-6 text-white mb-8">
       {/* Progress Section */}
@@ -15,9 +17,9 @@ function Progress() {
 
         <div className="p-6 flex flex-col md:flex-row gap-4">
           {[
-            { title: "Total Sessions", value: "12", icon: Activity, color: "text-blue-400" },
-            { title: "Accuracy", value: "84%", icon: Target, color: "text-teal-400" },
-            { title: "Streak", value: "5 Days", icon: Zap, color: "text-orange-400" },
+            { title: "Total Sessions", value: data.totalSession, icon: Activity, color: "text-blue-400" },
+            { title: "Accuracy", value: data.accuracy, icon: Target, color: "text-teal-400" },
+            { title: "Streak", value: data.streak, icon: Zap, color: "text-orange-400" },
           ].map((stat, i) => (
             <div key={i} className="flex-1 flex flex-col items-center justify-center gap-3 p-6 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group">
               <div className={`p-3 rounded-full bg-white/5 group-hover:scale-110 transition-transform ${stat.color}`}>
