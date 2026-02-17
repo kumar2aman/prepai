@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import Achievements from "./achievements";
 import { Activity, Target, Zap } from "lucide-react";
+import axios from "axios";
 
 
 function Progress({data}: any) {
+
+
+  const [totalSession, setTotalSession] = useState(0);
+
+  useEffect(() => {
+
+    const getsession = async () =>{
+       const response= await   axios.get("http://localhost:3001/api/v1/session/totalsession", {
+            withCredentials: true
+          })
+
+
+    setTotalSession(response.data);
+    }
+
+    getsession();
+
+  }, []);
+
 
 
   return (
@@ -17,7 +37,7 @@ function Progress({data}: any) {
 
         <div className="p-6 flex flex-col md:flex-row gap-4">
           {[
-            { title: "Total Sessions", value: data.totalSession, icon: Activity, color: "text-blue-400" },
+            { title: "Total Sessions", value:totalSession, icon: Activity, color: "text-blue-400" },
             { title: "Accuracy", value: data.accuracy, icon: Target, color: "text-teal-400" },
             { title: "Streak", value: data.streak, icon: Zap, color: "text-orange-400" },
           ].map((stat, i) => (

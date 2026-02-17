@@ -1,6 +1,6 @@
 import { ArrowRight, Play, Star, Users, Zap } from "lucide-react";
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 function Hero() {
   return (

@@ -39,7 +39,7 @@ function Signup() {
 
       console.log("Signup successful:", response.data);
       // Handle success - e.g., redirect to login page or dashboard
-     router.push("auth/signin")
+     router.push("/auth/signin")
     } catch (err) {
       console.error("Signup failed:", err);
       // Set a user-friendly error message

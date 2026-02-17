@@ -226,13 +226,7 @@ function Sidebar() {
             />
             Feedback
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group">
-            <Settings
-              size={20}
-              className="group-hover:text-teal-400 transition-colors"
-            />
-            Settings
-          </button>
+         
         </nav>
 
         {/* Footer */}
