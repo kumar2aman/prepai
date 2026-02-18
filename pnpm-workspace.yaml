@@ -1,0 +1,3 @@
+packages:
+  - "apps/*"
+  - "packages/*" # Good to have for shared UI or config later
