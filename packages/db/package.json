@@ -1,0 +1,23 @@
+{
+  "name": "@prepai/db",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    "./client": "./src/index.ts"
+  },
+  "scripts": {
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.1",
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^25.3.0",
+    "prisma": "^6.19.2",
+    "typescript": "latest"
+  }
+}
