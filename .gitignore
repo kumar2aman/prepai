@@ -47,3 +47,6 @@ apps/frontend/.vercel
 # typescript
 *.tsbuildinfo
 apps/frontend/next-env.d.ts
+
+
+.turbo
