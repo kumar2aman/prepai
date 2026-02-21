@@ -1,6 +1,6 @@
 "use client";
 
-import Dashboard from "@/app/components/dashboard";
+import Dashboard from "@/app/components/dashBoard";
 import React, { useContext } from "react";
 import { useDashboard } from "./dashboardProvider";
 

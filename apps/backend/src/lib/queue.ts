@@ -4,6 +4,7 @@ const queue: { chunk: string, resolve: Function }[] = [];
 let isProcessing = false;
 
 export function enqueue(chunk: string): Promise<string> {
+  console.log("Enqueueing chunk...");
   return new Promise((resolve) => {
     queue.push({ chunk, resolve });
     if (!isProcessing) processQueue();
@@ -17,6 +18,7 @@ async function processQueue() {
     const { chunk, resolve } = queue.shift()!;
 
     try {
+      console.log("Processing chunk...");
       const response = await convertToText({ data: chunk });
       resolve(response);
     } catch (err) {

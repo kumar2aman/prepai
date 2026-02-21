@@ -1,20 +1,23 @@
 import { Router } from "express";
 
-import { authMiddleware } from "../../auth-middleware.js";
-import prisma from "../../db.js";
+import { authMiddleware } from "../../../auth-middleware.js";
+import { prisma } from "@prepai/db/client";
 
 const router: Router = Router();
 
-router.get("/", authMiddleware, async (req, res) => {
+export let userStats = {};
+
+router.get("/stats", authMiddleware, async (req, res) => {
   const userId = req.userId;
+
   if (!userId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
   try {
-    const user = await prisma.userData.findFirst({
+    const user = await prisma.userData.findUnique({
       where: {
-        id: userId,
+        userId,
       },
     });
 
@@ -23,10 +26,11 @@ router.get("/", authMiddleware, async (req, res) => {
     }
 
     res.status(200).json(user);
+    userStats = user;
   } catch (error) {
     console.error("Prisma Create Error:", error);
     res.status(500).json({ error: "Failed to fetch user data" });
   }
 });
 
-export { router as userDataRouter };
+export { router as statsRouter };

@@ -2,7 +2,7 @@ import "dotenv/config";
 import { Router } from "express";
 
 import bcrypt from "bcryptjs";
-import prisma from "../../../db.js";
+import { prisma } from "@prepai/db/client";
 import jwt from "jsonwebtoken";
 import { signinSchema, signupSchema } from "../../../types/schema.js";
 
@@ -10,7 +10,8 @@ const router: Router = Router();
 
 router.post("/signup", async (req, res) => {
   const user = signupSchema.safeParse(req.body);
-
+   
+  console.log("user:", user);
   if (!user.success) {
     return res.status(400).json({ error: "No user data received." });
   }
@@ -39,9 +40,19 @@ router.post("/signup", async (req, res) => {
       },
     });
 
+    console.log("response:", response.id);
+
+   const userData = await prisma.userData.create({
+      data: {
+        userId: response.id,
+      },
+    });
+
+
+
     res
       .status(200)
-      .json({ message: "User created successfully", response: response });
+      .json({ message: "User created successfully" });
   } catch (error) {
     res.status(500).json({ error: "Failed to create user" });
   }

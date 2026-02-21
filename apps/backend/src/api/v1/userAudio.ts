@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
     const data = req.body;
 
     chatHistory.push({ role: "user", text: data.text });
-    console.log("  user response:", data);
+  
 
     res.sendStatus(200);
   } catch (error: any) {

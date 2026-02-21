@@ -2,10 +2,13 @@ import "dotenv/config";
 
 import { GoogleGenAI } from "@google/genai";
 import { prompt } from "../config/prompt.js";
+import { chatHistory } from "../api/v1/geminiAudio.js";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY_STT! });
 
-export async function result(): Promise<string> {
+export async function result(): Promise<object> {
+console.log("chatHistory", chatHistory)
+
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
     config: {

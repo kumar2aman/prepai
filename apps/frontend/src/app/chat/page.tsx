@@ -1,12 +1,13 @@
+"use client";
 
-
-import React from 'react'
-import VoiceInterviewPage from '../components/voice-interview'
+import VoiceInterviewPage from "../components/interviewPage/voice-interview";
 
 function Page() {
   return (
-   <VoiceInterviewPage/>
-  )
+    <div>
+      <VoiceInterviewPage />
+    </div>
+  );
 }
 
-export default Page
+export default Page;

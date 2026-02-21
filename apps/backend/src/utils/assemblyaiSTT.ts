@@ -16,7 +16,10 @@ interface Audio {
 }
 
 export async function convertToText(audio : Audio): Promise<string> {
+
+  console.log("Transcribing... from AssemblyAI");
   const startTime = Date.now();
+
   let tempPath = "";
 
   try {
