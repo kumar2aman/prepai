@@ -9,10 +9,10 @@
     "./client": "./dist/index.js"
   },
  "scripts": {
-    "build": "tsc",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push"
-  },
+  "build": "tsc",
+  "db:generate": "pnpm prisma generate", 
+  "db:push": "pnpm prisma db push"
+},
   "dependencies": {
     "@prisma/client": "^6.16.1",
     "dotenv": "^17.3.1"
