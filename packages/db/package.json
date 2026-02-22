@@ -8,10 +8,10 @@
     ".": "./dist/index.js",
     "./client": "./dist/index.js"
   },
-  "scripts": {
-    "build": "tsc",
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push"
+ "scripts": {
+    "build": "tsc && prisma generate --schema ./prisma/schema.prisma",
+    "db:generate": "prisma generate --schema ./prisma/schema.prisma",
+    "db:push": "prisma db push --schema ./prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^6.16.1",
