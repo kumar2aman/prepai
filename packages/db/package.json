@@ -10,8 +10,8 @@
   },
  "scripts": {
   "build": "tsc",
-  "db:generate": "pnpm prisma generate", 
-  "db:push": "pnpm prisma db push"
+  "db:generate": "prisma generate", 
+  "db:push": " prisma db push"
 },
   "dependencies": {
     "@prisma/client": "^6.16.1",
