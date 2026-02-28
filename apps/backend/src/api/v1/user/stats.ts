@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { authMiddleware } from "../../../auth-middleware.js";
-import { prisma } from "@prepai/db/client";
+import { prisma } from "@prepai/db";
 
 const router: Router = Router();
 

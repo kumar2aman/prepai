@@ -2,7 +2,7 @@ import "dotenv/config";
 import { Router } from "express";
 
 import bcrypt from "bcryptjs";
-import { prisma } from "@prepai/db/client";
+import { prisma } from "@prepai/db";
 import jwt from "jsonwebtoken";
 import { signinSchema, signupSchema } from "../../../types/schema.js";
 

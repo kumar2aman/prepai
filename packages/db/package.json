@@ -1,25 +1,43 @@
 {
   "name": "@prepai/db",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "module": "index.ts",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./client": "./dist/index.js"
+    ".": "./src/index.ts"
   },
+<<<<<<< HEAD
  "scripts": {
   "build": "tsc",
   "db:generate": "prisma generate", 
   "db:push": " prisma db push"
 },
+=======
+  "scripts": {
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:migrate:dev": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "format": "prisma format",
+    "generate": "prisma generate",
+    "lint": "eslint . --max-warnings 0",
+    "prebuild": "npm run generate",
+    "predev": "npm run generate",
+    "studio": "prisma studio"
+  },
+>>>>>>> ed7ff94 (fixed prisma not working)
   "dependencies": {
-    "@prisma/client": "^6.16.1",
-    "dotenv": "^17.3.1"
+    "@prisma/adapter-pg": "^7.4.2",
+    "@prisma/client": "latest",
+    "@prisma/client-runtime-utils": "7.2.0",
+    "dotenv": "^17.3.1",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
-    "@types/node": "^25.3.0",
-    "typescript": "latest",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^25.3.2",
+    "@types/pg": "^8.16.0",
+    "eslint": "^8.57.0",
+    "prisma": "latest",
+    "typescript": "5.5.4"
   }
 }

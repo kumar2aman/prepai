@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authMiddleware } from "../../auth-middleware.js";
-import { prisma } from "@prepai/db/client";
+import { prisma } from "@prepai/db";
 import { result } from "../../lib/review.js";
 
 

@@ -1,7 +1,14 @@
 {
   "name": "prepai",
   "private": true,
+<<<<<<< HEAD
  
+=======
+ "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+>>>>>>> ed7ff94 (fixed prisma not working)
    "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -11,8 +18,13 @@
   },
   "devDependencies": {
     "prettier": "^3.6.2",
+<<<<<<< HEAD
     "turbo": "latest",
     "typescript": "latest"
+=======
+    "turbo": "^2.5.5",
+    "typescript": "5.8.3"
+>>>>>>> ed7ff94 (fixed prisma not working)
   },
 "packageManager": "pnpm@10.12.1"
 }
