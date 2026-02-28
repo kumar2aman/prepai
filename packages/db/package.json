@@ -6,14 +6,7 @@
   "exports": {
     ".": "./src/index.ts"
   },
-<<<<<<< HEAD
- "scripts": {
-  "build": "tsc",
-  "db:generate": "prisma generate", 
-  "db:push": " prisma db push"
-},
-=======
-  "scripts": {
+   "scripts": {
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
@@ -24,8 +17,7 @@
     "predev": "npm run generate",
     "studio": "prisma studio"
   },
->>>>>>> ed7ff94 (fixed prisma not working)
-  "dependencies": {
+   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "latest",
     "@prisma/client-runtime-utils": "7.2.0",

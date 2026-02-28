@@ -3,10 +3,6 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-<<<<<<< HEAD
-        "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**", ".next/**", "out/**"]
-=======
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
@@ -22,7 +18,6 @@
     },
     "db:seed": {
       "cache": false
->>>>>>> ed7ff94 (fixed prisma not working)
     },
      "lint": {
       "dependsOn": ["^lint"]
@@ -34,14 +29,11 @@
       "cache": false,
       "persistent": true
     },
-<<<<<<< HEAD
 
-=======
     "generate": {
       "dependsOn": ["^generate"],
       "cache": false
     },
-    "lint": {}
->>>>>>> ed7ff94 (fixed prisma not working)
+   
   }
 }
