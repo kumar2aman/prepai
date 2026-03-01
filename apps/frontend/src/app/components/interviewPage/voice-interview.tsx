@@ -1,5 +1,5 @@
 "use client";
-
+import "dotenv/config";
 import {  useEffect, useRef, useState } from "react";
 import {  StopCircle, AudioLines, PowerOff } from "lucide-react";
 import { startGeminiSession } from "../../lib/geminiLiveService";
@@ -49,14 +49,14 @@ export default function VoiceInterviewPage() {
     setStatus,
     (aiText) => {
       setAiTranscript(aiText);
-      axios.post("http://localhost:3001/api/v1/geminiaudio", {
+      axios.post(`${process.env.backend_URL}/api/v1/geminiaudio`, {
          text: aiText, 
         }) 
       .catch((err) => console.error("Error sending AI audio:", err));
     },
     (userText) => {
       setUserTranscript(userText);
-      axios.post("http://localhost:3001/api/v1/useraudio", {
+      axios.post(`${process.env.backend_URL}/api/v1/useraudio`, {
         text:userText
       })
       .catch((err) => console.error("Error sending user audio:", err));
@@ -105,7 +105,7 @@ async function handleEndSession() {
   const sendSession = async () => {
     console.log("button clicked");
     const response = await axios.get(
-      "http://localhost:3001/api/v1/session/create_sessiondata",
+      `${process.env.backend_URL}/api/v1/session/create_sessiondata`,
       {
         withCredentials: true,
       },

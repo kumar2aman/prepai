@@ -1,3 +1,4 @@
+import "dotenv/config";
 import React, { useEffect, useState } from "react";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import Achievements from "./achievements";
@@ -13,7 +14,7 @@ function Progress({data}: any) {
   useEffect(() => {
 
     const getsession = async () =>{
-       const response= await   axios.get("http://localhost:3001/api/v1/session/totalsession", {
+       const response= await   axios.get(`${process.env.backend_URL}/api/v1/session/totalsession`, {
             withCredentials: true
           })
 

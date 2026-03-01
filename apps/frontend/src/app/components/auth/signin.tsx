@@ -1,4 +1,5 @@
 "use client";
+import "dotenv/config";
 import React, { useState } from "react";
 import axios from "axios";
 import { KeyRound } from "lucide-react";
@@ -28,8 +29,9 @@ function Signin() {
     }
 
     try {
+      console.log("env is",process.env.NEXT_PUBLIC_BACKEND_URL)
       const response = await axios.post(
-        "http://localhost:3001/api/v1/auth/signin",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/vi/auth/signin`,
         {
          
           email,

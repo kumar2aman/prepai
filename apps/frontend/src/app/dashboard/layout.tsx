@@ -1,5 +1,5 @@
 
-
+import "dotenv/config";
 import DashboardProvider from "./dashboardProvider";
 import { cookies } from "next/headers";
 
@@ -10,7 +10,7 @@ export default async function DashboardLayout({
 }) {
 
     const cookiesStore = (await cookies()).toString();
-  const res = await fetch("http://localhost:3001/api/v1/user/stats", {
+  const res = await fetch(`${process.env.backend_URL}/api/v1/user/stats`, {
     headers: {
       cookie: cookiesStore,
     },

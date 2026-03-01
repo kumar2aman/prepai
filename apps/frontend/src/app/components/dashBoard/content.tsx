@@ -1,3 +1,4 @@
+import "dotenv/config"
 import { LogOut } from "lucide-react";
 import React from "react";
 import { Button } from "../ui/button";
@@ -9,7 +10,7 @@ function Content({ username }: any) {
 
   const logouthandler = async () => {
     try {
-      await axios.post("http://localhost:3001/api/v1/auth/logout", null, {
+      await axios.post(`${process.env.backend_URL}/api/v1/auth/logout`, null, {
         withCredentials: true,
       });
       router.push("/");

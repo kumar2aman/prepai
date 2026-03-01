@@ -1,4 +1,5 @@
 "use client";
+import "dotenv/config"
 import React, { useState } from "react";
 import axios from "axios";
 import { KeyRound } from "lucide-react";
@@ -29,7 +30,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/v1/auth/signup",
+        `${process.env.backend_URL}/api/v1/auth/signup`,
         {
           username,
           email,

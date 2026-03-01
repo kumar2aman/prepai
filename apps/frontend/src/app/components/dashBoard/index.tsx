@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { useEffect, useState } from "react";
 import Content from "./content";
 import Progress from "./progress";
@@ -19,7 +20,7 @@ function Dashboard( {data}:DashboardProp) {
     const userData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/v1/user",
+          `${process.env.backend_URL}/api/v1/user`,
           {
             withCredentials: true,
           }

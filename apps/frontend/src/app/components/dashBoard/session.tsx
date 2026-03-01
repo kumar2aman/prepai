@@ -1,3 +1,4 @@
+import "dotenv/config"
 import React, { useEffect, useState } from "react";
 import { Card } from "../ui/card";
 import Leadarboard from "./leadarboard";
@@ -17,7 +18,7 @@ function Session() {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/v1/session/getsession",
+          `${process.env.backend_URL}/api/v1/session/getsession`,
           {
             withCredentials: true,
           },
