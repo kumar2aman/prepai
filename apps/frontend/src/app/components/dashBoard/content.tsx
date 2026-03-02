@@ -10,7 +10,7 @@ function Content({ username }: any) {
 
   const logouthandler = async () => {
     try {
-      await axios.post(`${process.env.backend_URL}/api/v1/auth/logout`, null, {
+      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/logout`, null, {
         withCredentials: true,
       });
       router.push("/");

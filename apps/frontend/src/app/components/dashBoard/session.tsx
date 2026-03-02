@@ -18,7 +18,7 @@ function Session() {
     const fetchSessions = async () => {
       try {
         const response = await axios.get(
-          `${process.env.backend_URL}/api/v1/session/getsession`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/session/getsession`,
           {
             withCredentials: true,
           },

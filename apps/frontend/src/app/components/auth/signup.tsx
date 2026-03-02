@@ -30,7 +30,7 @@ function Signup() {
 
     try {
       const response = await axios.post(
-        `${process.env.backend_URL}/api/v1/auth/signup`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/signup`,
         {
           username,
           email,

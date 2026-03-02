@@ -14,7 +14,7 @@ function Progress({data}: any) {
   useEffect(() => {
 
     const getsession = async () =>{
-       const response= await   axios.get(`${process.env.backend_URL}/api/v1/session/totalsession`, {
+       const response= await   axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/session/totalsession`, {
             withCredentials: true
           })
 

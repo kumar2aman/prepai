@@ -49,14 +49,14 @@ export default function VoiceInterviewPage() {
     setStatus,
     (aiText) => {
       setAiTranscript(aiText);
-      axios.post(`${process.env.backend_URL}/api/v1/geminiaudio`, {
+      axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/geminiaudio`, {
          text: aiText, 
         }) 
       .catch((err) => console.error("Error sending AI audio:", err));
     },
     (userText) => {
       setUserTranscript(userText);
-      axios.post(`${process.env.backend_URL}/api/v1/useraudio`, {
+      axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/useraudio`, {
         text:userText
       })
       .catch((err) => console.error("Error sending user audio:", err));
@@ -105,7 +105,7 @@ async function handleEndSession() {
   const sendSession = async () => {
     console.log("button clicked");
     const response = await axios.get(
-      `${process.env.backend_URL}/api/v1/session/create_sessiondata`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/session/create_sessiondata`,
       {
         withCredentials: true,
       },

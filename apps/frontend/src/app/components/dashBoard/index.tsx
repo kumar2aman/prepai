@@ -20,7 +20,7 @@ function Dashboard( {data}:DashboardProp) {
     const userData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.backend_URL}/api/v1/user`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user`,
           {
             withCredentials: true,
           }
