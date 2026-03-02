@@ -90,16 +90,20 @@ router.post("/signin", async (req, res) => {
     expiresIn: "2d",
   });
 
+  const isProduction = process.env.NODE_ENV === "production";
+
   res.cookie("token", token, {
     httpOnly: true, // prevent client-side access
-    secure: process.env.NODE_ENV === "production", // only send over production
-    sameSite: "strict", // protect against CSRF
+    secure: isProduction, // only send over production
+    sameSite: isProduction ? "none" : "lax", // protect against CSRF
     maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
     path: "/", // set the cookie for the entire domain
   });
 
   res.status(200).json({ message: "Login successful" });
 });
+
+
 
 router.post("/logout", async (req, res) => {
   res.clearCookie("token", {
