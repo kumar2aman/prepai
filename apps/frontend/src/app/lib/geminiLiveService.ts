@@ -1,7 +1,7 @@
 import { GoogleGenAI, Modality } from "@google/genai";
 import { Prompt } from "../config/prompt";
 
-let ws: WebSocket | null = null;
+
 
 let fullTranscript = "";
 let userTranscript = "";

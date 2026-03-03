@@ -35,7 +35,7 @@ export default function VoiceInterviewPage() {
       resetTimer();
       setIsActive(false);
     }
-  }, [timeLeft]);
+  }, [timeLeft,resetTimer]);
 
  async function handleStartSession() {
   const token = await getEphemeralToken();
@@ -214,7 +214,7 @@ async function handleEndSession() {
               className="text-lg text-white/60 font-light"
               style={{ textShadow: "0 2px 10px rgba(0,0,0,0.5)" }}
             >
-              "{usertranscript}"
+              &quot{usertranscript}&quot
             </p>
           )}
           {aitranscript && (

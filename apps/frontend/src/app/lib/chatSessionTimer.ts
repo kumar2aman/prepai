@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+
 
 interface SessionTimerProps {
   initialTimeoutSeconds: number;
@@ -15,7 +15,7 @@ const useSessionTimer = ({
   // Initialize state with the total number of seconds
 
   const [timeLeft, setTimeLeft] = useState(initialTimeoutSeconds);
-  const router = useRouter();
+
 
   useEffect(() => {
     if (!isActive) {
@@ -31,7 +31,7 @@ const useSessionTimer = ({
     // Cleanup function
 
     return () => clearInterval(intervalId);
-  }, [timeLeft, redirectPath, navigator, isActive]); // Dependencies: Re-run when time runs out or redirect path changes
+  }, [timeLeft, redirectPath,  isActive]); // Dependencies: Re-run when time runs out or redirect path changes
 
   // Function to reset the timer (e.g., when the user interacts with the app)
   const resetTimer = () => {

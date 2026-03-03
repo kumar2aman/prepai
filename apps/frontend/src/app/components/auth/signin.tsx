@@ -31,7 +31,7 @@ function Signin() {
     try {
       console.log("env is",process.env.NEXT_PUBLIC_BACKEND_URL)
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/vi/auth/signin`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/signin`,
         {
          
           email,
@@ -41,9 +41,15 @@ function Signin() {
         }
       );
 
+     if(response.status === 200){
+       console.log("Redirecting...");
+       router.push("/dashboard")
+     }
+      // Handle success - e.g., redirect to login page or dashboard
+
       console.log("Signin successful:", response.data);
       // Handle success - e.g., redirect to login page or dashboard
-     router.push("/dashboard")
+     
     } catch (err) {
       console.error("Signin failed:", err);
       // Set a user-friendly error message

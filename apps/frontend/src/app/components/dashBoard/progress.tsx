@@ -1,12 +1,21 @@
 import "dotenv/config";
 import React, { useEffect, useState } from "react";
-import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardHeader, CardTitle } from "../ui/card";
 import Achievements from "./achievements";
 import { Activity, Target, Zap } from "lucide-react";
 import axios from "axios";
 
+interface DashboardData {
+  Progress: string;
+  score: number;
+  level: number;
+  accuracy: number;
+  streak: number;
+  totalSession: number;
+}
 
-function Progress({data}: any) {
+
+function Progress({data}: {data:DashboardData}) {
 
 
   const [totalSession, setTotalSession] = useState(0);

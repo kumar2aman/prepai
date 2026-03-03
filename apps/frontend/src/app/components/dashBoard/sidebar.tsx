@@ -21,9 +21,7 @@ import {
   Home,
   Zap,
   MessageSquare,
-  Settings,
   HelpCircle,
-  LogOut,
 } from "lucide-react";
 import axios from "axios";
 
@@ -33,6 +31,8 @@ function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [interviewType, setInterviewType] = useState("frontend");
   const [duration, setDuration] = useState(2);
+
+  setDuration(2)
 
   const handleStart = () => {
     if (sessionName.trim()) {
@@ -48,7 +48,7 @@ function Sidebar() {
   };
 
   async function handelCreateSession() {
-    const response = await axios
+    await axios
       .post(
         "http://localhost:3001/api/v1/session/createsession",
         {
@@ -226,7 +226,6 @@ function Sidebar() {
             />
             Feedback
           </button>
-         
         </nav>
 
         {/* Footer */}

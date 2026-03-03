@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, ReactNode } from "react";
 
 export interface DashboardData {
   Progress: string;
@@ -11,9 +11,14 @@ export interface DashboardData {
   totalSession: number;
 }
 
+interface DashboardProviderProps {
+  data: DashboardData;
+  children: ReactNode;
+}
+
 const DashboardContext = createContext<DashboardData | null>(null);
 
-export default function DashboardProvider({ data, children }: any) {
+export default function DashboardProvider({ data, children }: DashboardProviderProps) {
   return (
     <DashboardContext.Provider value={data}>
       {children}

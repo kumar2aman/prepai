@@ -2,7 +2,7 @@ import "dotenv/config"
 import React, { useEffect, useState } from "react";
 import { Card } from "../ui/card";
 import Leadarboard from "./leadarboard";
-import { ArrowUpRight, Calendar } from "lucide-react";
+import {  Calendar } from "lucide-react";
 import axios from "axios";
 
 interface Session {

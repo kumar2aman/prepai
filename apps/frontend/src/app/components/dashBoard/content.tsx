@@ -5,7 +5,11 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
-function Content({ username }: any) {
+interface ContentProps {
+  username: string;
+}
+
+function Content({ username }: ContentProps) {
   const router = useRouter();
 
   const logouthandler = async () => {
