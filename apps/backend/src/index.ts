@@ -7,10 +7,22 @@ import { authRouter } from "./api/v1/auth/controller.js";
 
 const app = express();
 
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://your-frontend-domain.com", // add deployed frontend later
+];
+
 // middleware
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
