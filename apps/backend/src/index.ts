@@ -7,6 +7,7 @@ import { authRouter } from "./api/v1/auth/controller.js";
 
 const app = express();
 
+app.set("trust proxy", 1); // trust first proxy
 
 const allowedOrigins = [
   "http://localhost:3000",
