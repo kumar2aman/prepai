@@ -9,21 +9,12 @@ const app = express();
 
 app.set("trust proxy", 1); // trust first proxy
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://your-frontend-domain.com", // add deployed frontend later
-];
+
 
 // middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
     credentials: true,
   })
 );

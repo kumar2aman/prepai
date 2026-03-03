@@ -92,6 +92,9 @@ router.post("/signin", async (req, res) => {
 
   const isProduction = process.env.NODE_ENV === "production";
 
+
+  console.log("isProduction:", isProduction);
+
   res.cookie("token", token, {
     httpOnly: true, // prevent client-side access
     secure: isProduction, // only send over production
