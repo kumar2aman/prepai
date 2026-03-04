@@ -1,16 +1,16 @@
 import "dotenv/config";
 import { Router } from "express";
-
 import bcrypt from "bcryptjs";
 import { prisma } from "@prepai/db";
 import jwt from "jsonwebtoken";
 import { signinSchema, signupSchema } from "../../../types/schema.js";
+import { getCookieOptions } from "../../../lib/cookieConfig.js";
 
 const router: Router = Router();
 
 router.post("/signup", async (req, res) => {
   const user = signupSchema.safeParse(req.body);
-   
+
   console.log("user:", user);
   if (!user.success) {
     return res.status(400).json({ error: "No user data received." });
@@ -42,17 +42,13 @@ router.post("/signup", async (req, res) => {
 
     console.log("response:", response.id);
 
-   const userData = await prisma.userData.create({
+    const userData = await prisma.userData.create({
       data: {
         userId: response.id,
       },
     });
 
-
-
-    res
-      .status(200)
-      .json({ message: "User created successfully" });
+    res.status(200).json({ message: "User created successfully" });
   } catch (error) {
     res.status(500).json({ error: "Failed to create user" });
   }
@@ -77,7 +73,7 @@ router.post("/signin", async (req, res) => {
 
   const isPasswordValid = await bcrypt.compare(
     user.data?.password!,
-    existingUser.password
+    existingUser.password,
   );
 
   if (!isPasswordValid) {
@@ -90,33 +86,14 @@ router.post("/signin", async (req, res) => {
     expiresIn: "2d",
   });
 
-  const isProduction = process.env.NODE_ENV === "production";
-
-
-  console.log("isProduction:", isProduction);
-
-  res.cookie("token", token, {
-    httpOnly: true, // prevent client-side access
-    secure: isProduction, // only send over production
-    sameSite: isProduction ? "none" : "lax", // protect against CSRF
-    maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
-    path: "/", // set the cookie for the entire domain
-  });
+  res.cookie("token", token, getCookieOptions());
 
   res.status(200).json({ message: "Login successful" });
 });
 
-
-const isProduction = process.env.NODE_ENV === "production";
-
-
 router.post("/logout", async (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "none" : "lax",
-    path: "/",
-  });
+  const { maxAge, ...clearOptions } = getCookieOptions();
+  res.clearCookie("token", clearOptions);
   res.status(200).json({ message: "Logout successful" });
 });
 

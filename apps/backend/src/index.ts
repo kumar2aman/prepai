@@ -7,17 +7,26 @@ import { authRouter } from "./api/v1/auth/controller.js";
 
 const app = express();
 
-app.set("trust proxy", 1); // trust first proxy
 
 
+app.enable("trust proxy");
 
 // middleware
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+const allowedOrigins = [
+  "http://localhost:3000",
+  process.env.FRONTEND_URL
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
 
 app.use(express.json({ limit: "50mb" }));
 
