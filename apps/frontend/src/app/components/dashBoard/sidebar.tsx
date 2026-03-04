@@ -32,14 +32,14 @@ function Sidebar() {
   const [interviewType, setInterviewType] = useState("frontend");
   const [duration, setDuration] = useState(2);
 
-  setDuration(2)
+
 
   const handleStart = () => {
     if (sessionName.trim()) {
       const query = new URLSearchParams({
         session: sessionName,
         type: interviewType,
-        duration: duration.toString(),
+        duration: setDuration.toString(),
       });
       router.push(`/chat?${query}`);
       setIsOpen(false);
