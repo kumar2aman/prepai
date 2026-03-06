@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 @import "tailwindcss";
 
 @theme {
-  --font-love:"Love Ya Like A Sister", 'cursive';
+  --font-love: var(--font-love);
   --font-open:"Open Sans", 'sans-serif';
   --font-ubuntu:"Ubuntu", 'sans-serif';
 
@@ -31,3 +31,4 @@ background-image: linear-gradient(to right,#FF512F, #F09819);
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+

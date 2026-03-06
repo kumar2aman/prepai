@@ -1,8 +1,16 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Love_Ya_Like_A_Sister } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+
+const inter = Inter({ subsets: ['latin'],variable: '--font-inter', });
+
+
+const love = Love_Ya_Like_A_Sister({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-love',
+})
 
 export const metadata: Metadata = {
   title: 'PrepAI - Master Your Interview Skills with AI',
@@ -22,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${love.variable}`}>
         {children}
       </body>
     </html>

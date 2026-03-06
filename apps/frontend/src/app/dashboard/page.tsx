@@ -1,7 +1,7 @@
 "use client";
 
 import Dashboard from "@/app/components/dashBoard";
-import React from "react";
+
 import { useDashboard } from "./dashboardProvider";
 
 function Page() {

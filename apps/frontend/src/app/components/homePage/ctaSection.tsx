@@ -8,10 +8,11 @@ function CtaSection() {
         <div className="bg-gradient-to-r from-blue-500/10 to-teal-500/10 rounded-3xl border border-blue-500/20 p-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Ready to Ace Your Next{' '}
+            <br/>
             <span className="font-love gradient-orange   bg-clip-text text-transparent">
               Interview {" "} 
             </span>
-             ?
+             <span className='text-red-600'>?</span>
           </h2>
           <p className="text-xl text-gray-300 mb-8">
             Join thousands of professionals who have improved their interview skills with PrepAI.
