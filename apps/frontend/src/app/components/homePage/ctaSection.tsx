@@ -1,8 +1,13 @@
-import React from 'react'
+"use client"
 import { Button } from '../ui/button'
 import { ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation';
+
 
 function CtaSection() {
+
+const router = useRouter();
+
   return (
     <section className="relative z-10 px-6 py-20 max-w-4xl mx-auto text-center">
         <div className="bg-gradient-to-r from-blue-500/10 to-teal-500/10 rounded-3xl border border-blue-500/20 p-12">
@@ -18,7 +23,7 @@ function CtaSection() {
             Join thousands of professionals who have improved their interview skills with PrepAI.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg">
+            <Button onClick={()=>router.push("/auth/signup")} size="lg" className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg">
               Get Started
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>

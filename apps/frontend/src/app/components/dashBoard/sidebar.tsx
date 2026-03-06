@@ -1,4 +1,5 @@
 "use client";
+import "dotenv/config";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import {
@@ -50,7 +51,7 @@ function Sidebar() {
   async function handelCreateSession() {
     await axios
       .post(
-        "http://localhost:3001/api/v1/session/createsession",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/session/createsession`,
         {
           name: sessionName,
         },

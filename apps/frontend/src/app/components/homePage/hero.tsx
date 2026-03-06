@@ -1,7 +1,11 @@
+"use client";
 import { ArrowRight, Play, Star, Users, Zap } from "lucide-react";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 function Hero() {
+
+  const router = useRouter();
   return (
     <section className="px-6 py-20 max-w-7xl mx-auto">
       <div className="flex flex-col items-center text-center w-full">
@@ -28,7 +32,7 @@ function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 mt-8">
-          <Button size="xl" className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg">
+          <Button onClick={()=>{router.push("/auth/signin")}} size="xl" className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg">
             <Play className="w-5 h-5 mr-2 text-black" />
             Start Practice Interview
           </Button>

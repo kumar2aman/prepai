@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 // This function will be called for every request that matches the config
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // 1. Get the token from the user's cookies
   const token = request.cookies.get('token')?.value;
 

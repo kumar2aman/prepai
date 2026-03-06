@@ -132,14 +132,14 @@ function Signin() {
               <hr className="flex-grow border-gray-600" />
             </div>
 
-            <button className="w-full flex items-center justify-center py-3 border border-gray-600 rounded-lg hover:bg-gray-800 transition-colors">
+            <button  className="w-full flex items-center justify-center py-3 border border-gray-600 rounded-lg hover:bg-gray-800 transition-colors disabled:">
               <KeyRound className="mr-2 h-5 w-5" />
               Continue with Google
             </button>
 
             <p className="mt-6 text-center text-sm text-gray-400">
               Dont have an account?{" "}
-              <a href="#" className="font-medium text-blue-400 hover:underline">
+              <a onClick={()=>router.push("/auth/signup")} href="#" className="font-medium text-blue-400 hover:underline">
                 Sign up
               </a>
             </p>

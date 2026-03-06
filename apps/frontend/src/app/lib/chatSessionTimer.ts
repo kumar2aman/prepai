@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 
 interface SessionTimerProps {
@@ -12,33 +12,24 @@ const useSessionTimer = ({
   redirectPath,
   isActive,
 }: SessionTimerProps) => {
-  // Initialize state with the total number of seconds
-
   const [timeLeft, setTimeLeft] = useState(initialTimeoutSeconds);
 
-
   useEffect(() => {
-    if (!isActive) {
+    if (!isActive || timeLeft <= 0) {
       return;
     }
 
-    // Set  interval
     const intervalId = setInterval(() => {
-      // Decrease the time left every second
       setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
 
-    // Cleanup function
-
     return () => clearInterval(intervalId);
-  }, [timeLeft, redirectPath,  isActive]); // Dependencies: Re-run when time runs out or redirect path changes
+  }, [isActive, timeLeft <= 0]); // Re-run only when isActive changes or time hits zero
 
-  // Function to reset the timer (e.g., when the user interacts with the app)
-  const resetTimer = () => {
+  const resetTimer = useCallback(() => {
     setTimeLeft(initialTimeoutSeconds);
-  };
+  }, [initialTimeoutSeconds]);
 
-  // Return the time left and the reset function
   return { timeLeft, resetTimer };
 };
 
