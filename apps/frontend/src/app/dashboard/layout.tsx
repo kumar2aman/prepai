@@ -10,8 +10,8 @@ export default async function DashboardLayout({
 }) {
 
     const cookiesStore = (await cookies()).toString();
-    console.log("fromlayout ", process.env.NEXT_PUBLIC_BACKEND_URL);
-  const res = await fetch(`http://localhost:3001/api/v1/user/stats`, {
+   
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/stats`, {
     headers: {
       cookie: cookiesStore,
     },
