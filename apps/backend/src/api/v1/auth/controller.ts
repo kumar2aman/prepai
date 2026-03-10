@@ -86,6 +86,7 @@ router.post("/signin", async (req, res) => {
     expiresIn: "2d",
   });
 
+  
   res.cookie("token", token, getCookieOptions());
 
   res.status(200).json({ message: "Login successful" });

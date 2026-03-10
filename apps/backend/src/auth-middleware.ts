@@ -13,6 +13,7 @@ export function authMiddleware(
   }
 
   try {
+    
     const decodedToken = jwt.verify(token as string, process.env.JWT_SECRET!);
 
     req.userId = (decodedToken as unknown as JwtPayload)

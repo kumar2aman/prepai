@@ -1,3 +1,10 @@
 packages:
   - "apps/*"
-  - "packages/*" # Good to have for shared UI or config later
+  - "packages/*"
+  - "packages/*/*" 
+
+ignoredBuiltDependencies:
+  - ffmpeg-static
+  - "@tailwindcss/oxide"
+  - sharp
+  - unrs-resolver

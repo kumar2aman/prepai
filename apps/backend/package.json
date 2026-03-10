@@ -1,38 +1,40 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-   "main": "index.js",
-  "scripts": {
+ "name": "backend",
+ "version": "1.0.0",
+ "main": "index.js",
+ "scripts": {
   "build": "tsc -b",
   "start": "node dist/index.js",
-  "dev": "npm run build && npm run start" 
-},  
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@google/genai": "^1.17.0",
-   "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/jsonwebtoken": "^9.0.10",
-    "bcryptjs": "^3.0.2",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.2",
-    "express": "^5.1.0",
-     "genai": "link:@types/@google/genai",
-    "jsonwebtoken": "^9.0.2",
-    "typescript": "^5.9.2",
-     "zod": "^4.1.8"
-  },
-  "devDependencies": {
-     "@prepai/db": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/bcryptjs": "^3.0.0",
-    "@types/node": "^24.3.1",
-    
-    "tsx": "^4.21.0"
-  }
+  "dev": "npm run build && npm run start"
+ },
+ "keywords": [],
+ "author": "",
+ "license": "ISC",
+ "description": "",
+ "dependencies": {
+  "@google/genai": "^1.17.0",
+  "@types/cookie-parser": "^1.4.9",
+  "@types/cors": "^2.8.19",
+  "@types/express": "^5.0.3",
+  "@types/jsonwebtoken": "^9.0.10",
+  "bcryptjs": "^3.0.2",
+  "cookie-parser": "^1.4.7",
+  "cors": "^2.8.5",
+  "dotenv": "^17.2.2",
+  "express": "^5.1.0",
+  "express-session": "^1.19.0",
+  "genai": "link:@types/@google/genai",
+  "jsonwebtoken": "^9.0.2",
+  "passport": "^0.7.0",
+  "passport-google-oauth20": "^2.0.0",
+  "typescript": "^5.9.2",
+  "zod": "^4.1.8"
+ },
+ "devDependencies": {
+  "@prepai/db": "workspace:*",
+  "@repo/typescript-config": "workspace:*",
+  "@types/bcryptjs": "^3.0.0",
+  "@types/node": "^24.3.1",
+  "tsx": "^4.21.0"
+ }
 }
