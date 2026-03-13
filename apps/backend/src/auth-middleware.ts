@@ -9,15 +9,14 @@ export function authMiddleware(
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized form authMiddleware" });
   }
 
   try {
-    
     const decodedToken = jwt.verify(token as string, process.env.JWT_SECRET!);
 
     req.userId = (decodedToken as unknown as JwtPayload)
-      .userid as unknown as string;
+      .userId as unknown as string;
 
     next();
   } catch (error) {

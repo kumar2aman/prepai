@@ -4,7 +4,7 @@ import cors from "cors";
 import cookiesParser from "cookie-parser";
 import { router } from "./routes/routes.js";
 import { authRouter } from "./api/v1/auth/controller.js";
-
+import passport from "./lib/passport.js";
 const app = express();
 
 
@@ -31,6 +31,8 @@ app.use(cors({
 app.use(express.json({ limit: "50mb" }));
 
 app.use(cookiesParser());
+
+app.use(passport.initialize());
 
 app.get("/", (req, res) => {
   res.send("Hello from the PrepAI backend!");

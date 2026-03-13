@@ -56,6 +56,17 @@ function Signup() {
     }
   };
 
+
+    const handleGoogleSignin = () => {
+    console.log("Signing in with Google...");
+    try {
+      window.location.href = `http://localhost:3001/api/v1/auth/google`;
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+    }  
+  }
+
+
   return (
     <>
       <div className="flex items-center justify-center min-h-screen bg-black text-white p-4 sm:p-6 lg:p-8">
@@ -124,14 +135,14 @@ function Signup() {
             </form>
 
             <div className="flex items-center my-6">
-              <hr className="flex-grow border-gray-600" />
+              <hr className="grow border-gray-600" />
               <span className="mx-4 text-sm text-gray-400">
                 Or continue with
               </span>
-              <hr className="flex-grow border-gray-600" />
+              <hr className="grow border-gray-600" />
             </div>
 
-            <button className="w-full flex items-center justify-center py-3 border border-gray-600 rounded-lg hover:bg-gray-800 transition-colors">
+            <button onClick={handleGoogleSignin} className="w-full flex items-center justify-center py-3 border border-gray-600 rounded-lg hover:bg-gray-800 transition-colors">
               <KeyRound className="mr-2 h-5 w-5" />
               Continue with Google
             </button>

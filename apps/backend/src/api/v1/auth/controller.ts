@@ -5,6 +5,7 @@ import { prisma } from "@prepai/db";
 import jwt from "jsonwebtoken";
 import { signinSchema, signupSchema } from "../../../types/schema.js";
 import { getCookieOptions } from "../../../lib/cookieConfig.js";
+import passport from "passport";
 
 const router: Router = Router();
 
@@ -23,11 +24,13 @@ router.post("/signup", async (req, res) => {
       },
     });
 
-    if (existingUser?.email) {
-      return res.status(400).json("User email already exists.");
+    
+    if(existingUser && existingUser?.email && existingUser?.username) {
+        return res.status(400).json("User email and username already exists.");
     }
-    if (existingUser?.username) {
-      return res.status(400).json("Username already exists.");
+    
+    if(existingUser?.provider && existingUser?.provider !== "local") {
+        return res.status(400).json("User already exists.");
     }
 
     const encryptedpassword = await bcrypt.hash(user.data?.password!, 10);
@@ -37,10 +40,14 @@ router.post("/signup", async (req, res) => {
         username: user.data?.username,
         email: user.data?.email,
         password: encryptedpassword,
+        provider: "local",
       },
     });
 
-    console.log("response:", response.id);
+    if (!response) {
+      return res.status(400).json({ error: "Failed to create user" });
+    }
+ 
 
     const userData = await prisma.userData.create({
       data: {
@@ -67,7 +74,7 @@ router.post("/signin", async (req, res) => {
     },
   });
 
-  if (!existingUser) {
+  if (!existingUser || !existingUser.password) {
     return res.status(400).json({ error: "User does not exist." });
   }
 
@@ -80,17 +87,40 @@ router.post("/signin", async (req, res) => {
     return res.status(400).json({ error: "Invalid password." });
   }
 
-  const userid = existingUser.id;
+  const userId = existingUser.id;
 
-  const token = jwt.sign({ userid }, process.env.JWT_SECRET!, {
+  const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
     expiresIn: "2d",
   });
 
-  
   res.cookie("token", token, getCookieOptions());
 
   res.status(200).json({ message: "Login successful" });
 });
+
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["email", "profile"] }),
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false, failureRedirect: "/signin" },),
+  async (req: any, res: any) => {
+    const userId = req.user.id;
+    const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
+      expiresIn: "2d",
+    });
+
+     await prisma.userData.create({
+      data: {
+        userId: userId,
+      },
+    });
+    res.cookie("token", token, getCookieOptions());
+    res.redirect("http://localhost:3000/dashboard");
+  },
+);
 
 router.post("/logout", async (req, res) => {
   const { maxAge, ...clearOptions } = getCookieOptions();
