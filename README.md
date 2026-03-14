@@ -54,17 +54,21 @@ Clone the repository:
 ```bash
 git clone https://github.com/yourusername/prepai.git
 cd prepai
-
-
+```
 ```bash
 
 pnpm install
 
+```
+
+Environment Setup
+Copy the example environment file and fill in your credentials:
 
 ```bash
 
 cp .env.example .env
 
+```
 
 Update .env with your:
 
@@ -77,7 +81,7 @@ JWT_SECRET
 FRONTEND_URL / BACKEND_URL
 
 
-Database Setup
+## Database Setup
 
 
 Generate Prisma client:
@@ -86,33 +90,37 @@ Generate Prisma client:
 
 pnpm prisma generate
 
+```
+
 Run migrations:
 
 ```bash
 
 pnpm prisma migrate dev --name init
 
+```
 
+## 💻 Development
 
-Running Locally
-Frontend
+### Frontend
 
 ```bash
-
 pnpm dev:frontend
-
+```
 
 Runs Next.js frontend on http://localhost:3000
 
-Backend
+
+### Backend
 
 ```bash
-
 pnpm dev:backend
+```
+
 
 Runs Express API server on http://localhost:3001
 
-Usage :-
+## Usage :-
 
 Open frontend in your browser
 
@@ -122,7 +130,7 @@ Start an AI voice interview
 
 Receive a performance score at the end
 
-Contributing:-
+## Contributing:-
 
 We welcome contributions!
 
@@ -130,38 +138,35 @@ Found a bug? Open an issue
 
 Want to add a feature? Fork and submit a PR
 
-Guidelines:-
+## Guidelines:-
 
-Follow the existing code style (Next.js + TypeScript best practices)
+1. Follow the existing code style (Next.js + TypeScript best practices)
 
-Document any new APIs or components
+2. Document any new APIs or components
 
-Ensure database migrations are included for backend changes
+3. Ensure database migrations are included for backend changes
 
-Roadmap / Upcoming Features
+## Roadmap / Upcoming Features:-
 
-Improve AI voice analysis
+- Improve AI voice analysis
 
-Add question categories and custom interview templates
+- Add question categories and custom interview templates
 
-Real-time interviewer feedback and suggestions
+- Real-time interviewer feedback and suggestions
 
-UI/UX improvements
+- UI/UX improvements
 
-Performance optimization
+- Performance optimization
 
-License:-
+## License:-
 
-This project is MIT Licensed — feel free to contribute and use it freely.
-
-Contact / Support
+- This project is MIT Licensed — feel free to contribute and use it freely.
 
 
 
+### Report: Bugs / Request Features: Issues
 
-Report: Bugs / Request Features: Issues
-
-PrepAI — AI interviewing made smarter, faster, and open-source. 🚀
+### PrepAI — AI interviewing made smarter, faster, and open-source. 🚀
 
 
 ---
