@@ -1,12 +1,14 @@
-export const getCookieOptions = () => {
+import { CookieOptions } from "express";
+
+export const getCookieOptions = (): CookieOptions => {
   const isProduction = process.env.NODE_ENV === "production";
+
   return {
     httpOnly: true,
     secure: isProduction,
-    sameSite: "lax" as const,                      //"lax" for both
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 2 * 24 * 60 * 60 * 1000,
     path: "/",
-    ...(isProduction && { domain: ".7labs.in" }),   //shared domain only in prod
+    ...(isProduction && { domain: ".7labs.in" }),
   };
 };
-
