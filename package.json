@@ -1,7 +1,7 @@
 {
   "name": "prepai",
   "private": true,
- 
+
  "workspaces": [
     "apps/*",
     "packages/*"

@@ -41,6 +41,9 @@ router.post("/signup", async (req, res) => {
         email: user.data?.email,
         password: encryptedpassword,
         provider: "local",
+        userdata:{
+            create:{}
+        }
       },
     });
 
@@ -48,12 +51,6 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ error: "Failed to create user" });
     }
  
-
-    const userData = await prisma.userData.create({
-      data: {
-        userId: response.id,
-      },
-    });
 
     res.status(200).json({ message: "User created successfully" });
   } catch (error) {
@@ -108,15 +105,12 @@ router.get(
   passport.authenticate("google", { session: false, failureRedirect: "/signin" },),
   async (req: any, res: any) => {
     const userId = req.user.id;
+
     const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
       expiresIn: "2d",
     });
 
-     await prisma.userData.create({
-      data: {
-        userId: userId,
-      },
-    });
+ 
     res.cookie("token", token, getCookieOptions());
     res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
   },

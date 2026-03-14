@@ -28,17 +28,22 @@ passport.use(
             }
 
         })
+
+        console.log("user:",user)
          if(user && user.provider !== "google"){
              return done(new Error("User already exists"), undefined);
          }
 
-
+          console.log("user 2:",user)
         if(!user){
             user = await prisma.user.create({
                 data: {
                     email,
                     username: profile.displayName,
-                    provider: "google"
+                    provider: "google",
+                    userdata:{
+                        create:{}
+                    }
                 }
             })
         }
