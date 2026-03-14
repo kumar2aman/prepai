@@ -60,7 +60,7 @@ function Signup() {
     const handleGoogleSignin = () => {
     console.log("Signing in with Google...");
     try {
-      window.location.href = `http://localhost:3001/api/v1/auth/google`;
+      window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/google`;
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }  
