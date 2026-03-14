@@ -118,7 +118,7 @@ router.get(
       },
     });
     res.cookie("token", token, getCookieOptions());
-    res.redirect("http://localhost:3000/dashboard");
+    res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
   },
 );
 

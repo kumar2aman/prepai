@@ -28,7 +28,9 @@ passport.use(
             }
 
         })
-
+         if(user && user.provider !== "google"){
+             return done(new Error("User already exists"), undefined);
+         }
 
 
         if(!user){
