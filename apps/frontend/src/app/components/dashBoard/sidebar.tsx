@@ -25,6 +25,7 @@ import {
   HelpCircle,
 } from "lucide-react";
 import axios from "axios";
+import FeedbackDialog from "./feedback";
 
 function Sidebar() {
   const router = useRouter();
@@ -33,24 +34,31 @@ function Sidebar() {
   const [interviewType, setInterviewType] = useState("frontend");
   const [duration, setDuration] = useState(2);
 
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
 
-  const handleStart = () => {
+
+  const handleStart = async () => {
     if (sessionName.trim()) {
-      const query = new URLSearchParams({
-        session: sessionName,
-        type: interviewType,
-        duration: setDuration.toString(),
-      });
-      router.push(`/chat?${query}`);
-      setIsOpen(false);
-      handelCreateSession();
+      try {
+        const session = await handelCreateSession();
+        const query = new URLSearchParams({
+          session: sessionName,
+          type: interviewType,
+          duration: duration.toString(),
+          ...(session?.id ? { sessionId: session.id } : {}),
+        });
+        router.push(`/chat?${query}`);
+        setIsOpen(false);
+      } catch (err) {
+        console.error("Failed to start session:", err);
+      }
     }
   };
 
   async function handelCreateSession() {
-    await axios
-      .post(
+    try {
+      const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/session/createsession`,
         {
           name: sessionName,
@@ -58,8 +66,12 @@ function Sidebar() {
         {
           withCredentials: true,
         },
-      )
-      .catch((err) => console.error("Error creating session:", err));
+      );
+      return response.data;
+    } catch (err) {
+      console.error("Error creating session:", err);
+      throw err;
+    }
   }
 
   const interviewTypes = [
@@ -114,7 +126,7 @@ function Sidebar() {
 
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-              <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group">
+              <button className="w-[11vw]  flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5  rounded-xl transition-all duration-200 font-medium font-ubuntu group">
                 <Zap
                   size={20}
                   className="group-hover:text-orange-400 transition-colors"
@@ -220,13 +232,17 @@ function Sidebar() {
             </DialogContent>
           </Dialog>
 
-          <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group">
+          <button
+            onClick={() => setIsFeedbackOpen(true)}
+            className="w-[11vw] flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer"
+          >
             <MessageSquare
               size={20}
               className="group-hover:text-purple-400 transition-colors"
             />
             Feedback
           </button>
+          <FeedbackDialog isOpen={isFeedbackOpen} onOpenChange={setIsFeedbackOpen} />
         </nav>
 
         {/* Footer */}
