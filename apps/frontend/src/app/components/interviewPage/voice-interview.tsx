@@ -6,8 +6,13 @@ import { startRecording, stopRecording } from "../../lib/mediaRecorder";
 import { getEphemeralToken } from "../../lib/ephemeralToken";
 import axios from "axios";
 import useSessionTimer from "../../lib/chatSessionTimer";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function VoiceInterviewPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const sessionId = searchParams.get("sessionId");
+
   const [status, setStatus] = useState("Ready");
   const [recording, setRecording] = useState(false);
   const sessionRef = useRef<any>(null);
@@ -30,6 +35,22 @@ export default function VoiceInterviewPage() {
     isActive: isActive,
   });
 
+  const sendSession = useCallback(async (sId: string | null) => {
+    setStatus("Calculating score...");
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/session/create_sessiondata`,
+        {
+          params: sId ? { sessionId: sId } : {},
+          withCredentials: true,
+        }
+      );
+      console.log("Session data:", response.data);
+    } catch (err) {
+      console.error("Error creating session data:", err);
+    }
+  }, []);
+
   const handleEndSession = useCallback(async () => {
     if (!sessionRef.current && !recording) return;
 
@@ -45,11 +66,20 @@ export default function VoiceInterviewPage() {
     }
 
     sessionRef.current = null;
-    setStatus("Disconnected");
-    setIsActive(false);
     setRecording(false);
     setIsConnecting(false);
-  }, [recording]);
+    setIsActive(false);
+
+    try {
+      await sendSession(sessionId);
+      setStatus("Disconnected");
+    } catch (err) {
+      console.error("Error saving session statistics:", err);
+      setStatus("Error saving statistics");
+    }
+
+    router.push("/dashboard");
+  }, [recording, sessionId, sendSession, router]);
 
   useEffect(() => {
     setDuration(timeLeft);
@@ -126,13 +156,7 @@ export default function VoiceInterviewPage() {
     }
   }, [isConnecting]);
 
-  const sendSession = async () => {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/session/create_sessiondata`,
-      { withCredentials: true }
-    );
-    console.log("Session data:", response.data);
-  };
+  // sendSession is declared above in component body now
 
   // ------------------------------
   // The rest of your UI remains unchanged
