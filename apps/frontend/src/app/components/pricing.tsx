@@ -16,7 +16,7 @@ export default function Pricing() {
     {
       name: "Vibe Check Plan",
       price: "$0",
-      period: "forever / fr fr",
+      period: "forever",
       description: "For the lone wolves ready to lock in.",
       icon: Sparkles,
       iconColor: "text-cyan-400",
@@ -34,7 +34,7 @@ export default function Pricing() {
     {
       name: "Lit Plan (Pro-ish)",
       price: "$0",
-      period: "no cap / fr fr",
+      period: "no cap",
       description: "Bro really expected a paywall here 💀",
       icon: Flame,
       iconColor: "text-orange-400",
@@ -52,7 +52,7 @@ export default function Pricing() {
     {
       name: "Delulu Plan",
       price: "$0",
-      period: "bestie era / fr fr",
+      period: "bestie era",
       description: "For corporate giants used to paying $999.",
       icon: Heart,
       iconColor: "text-purple-400",
@@ -91,7 +91,7 @@ export default function Pricing() {
         {/* Subtitle */}
         <p className="text-lg md:text-xl font-open text-gray-300 max-w-3xl mx-auto leading-relaxed">
           We don't do paywalls here. Clean UI, realistic prep, absolute zero cost.
-          <br className="hidden md:inline" /> Go get that bag, fr fr! 🚀
+          <br className="hidden md:inline" /> Go get that bag! 🚀
         </p>
       </div>
 
