@@ -237,12 +237,16 @@ export default function VoiceInterviewPage() {
         </div>
       </main>
 
-      {(aitranscript) && (
+      {(aitranscript || (sessionRef.current && !aitranscript)) && (
         <div className="absolute bottom-32 w-full px-8 max-w-3xl text-center z-10 mx-auto left-0 right-0 space-y-4">
          
-          {aitranscript && (
+          {aitranscript ? (
             <p className="text-2xl text-white font-medium leading-relaxed" style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}>
               {aitranscript}
+            </p>
+          ) : (
+            <p className="text-xl text-blue-400 font-semibold tracking-wide animate-pulse" style={{ textShadow: "0 0 20px rgba(59,130,246,0.5)" }}>
+              Say "Hi" or "Hello" to start your interview!
             </p>
           )}
         </div>
