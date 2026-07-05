@@ -156,11 +156,8 @@ export default function VoiceInterviewPage() {
     }
   }, [isConnecting]);
 
-  // sendSession is declared above in component body now
 
-  // ------------------------------
-  // The rest of your UI remains unchanged
-  // ------------------------------
+  
   return (
     <div className="relative flex flex-col items-center justify-between min-h-screen bg-black text-white overflow-hidden font-sans selection:bg-blue-500/30">
       {/* Background Gradients */}

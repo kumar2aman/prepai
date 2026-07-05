@@ -5,7 +5,7 @@ import { authMiddleware } from "../../auth-middleware.js";
 
 const router: Router = Router();
 
-const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY_STT! });
 
 router.get("/", authMiddleware, async (req, res) => {
   try {
@@ -24,7 +24,12 @@ router.get("/", authMiddleware, async (req, res) => {
 
     res.status(200).json({ token: token.name });
   } catch (error) {
-    res.status(500).json({ error: "Failed to create ephemeral token" });
+    console.error("Error creating ephemeral token on backend:", error);
+    res.status(500).json({ 
+      error: "Failed to create ephemeral token",
+      details: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined
+    });
   }
 });
 

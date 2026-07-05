@@ -2,6 +2,7 @@ import { Router } from "express";
 import { authMiddleware } from "../../auth-middleware.js";
 import { prisma } from "@prepai/db";
 import { result } from "../../lib/review.js";
+import { chatHistory } from "./geminiAudio.js";
 
 
 const router: Router = Router();
@@ -20,15 +21,18 @@ router.post("/createsession", authMiddleware,  async (req, res) => {
 
   console.log("data:", data.name);
 
+  // Clear previous session's chat history
+  chatHistory.length = 0;
+
   try {
-    await prisma.session.create({
+    const session = await prisma.session.create({
       data: {
         userId: userId,
         name: data.name as string,
       },
     });
 
-    res.status(200).json("session created");
+    res.status(200).json(session);
   } catch (error) {
     console.error("Prisma Create Error:", error);
     res.status(500).json({ error: "Failed to create session" });
@@ -38,18 +42,21 @@ router.post("/createsession", authMiddleware,  async (req, res) => {
 router.get("/create_sessiondata", authMiddleware, async (req, res) => {
   console.log("create_sessiondata route called");
   const userId = req.userId;
-  console.log("userid from sessiondata is userId:", userId);
-  const data = await result(); //  TODO: Needed to be tested before creation of session data
-  console.log("data:", data);
+  const { sessionId } = req.query;
+  console.log("userid from sessiondata is userId:", userId, "sessionId:", sessionId);
+  
   if (!userId) {
     return res.status(401).json({ error: "Unauthorized form create_sessiondata" });
   }
 
-  if (!data) {
-    return res.status(400).json({ error: "No data received." });
-  }
-
   try {
+    const data = await result() as any;  
+    console.log("data:", data);
+    if (!data) {
+      return res.status(400).json({ error: "No data received." });
+    }
+
+    // Update global user statistics
     await prisma.userData.update({
       where: {
         userId: userId,
@@ -59,9 +66,26 @@ router.get("/create_sessiondata", authMiddleware, async (req, res) => {
       },
     });
 
-    res.status(200).json("user data created");
+    // Update specific session statistics if sessionId is provided
+    if (sessionId) {
+      await prisma.session.update({
+        where: {
+          id: sessionId as string,
+          userId: userId,
+        },
+        data: {
+          score: data.score,
+          level: data.level,
+          accuracy: data.accuracy,
+          streak: data.streak,
+          progress: data.progress,
+        },
+      });
+    }
+
+    res.status(200).json({ message: "session data created", data });
   } catch (error) {
-    console.error("Prisma Create Error:", error);
+    console.error("Prisma Update Error:", error);
     res.status(500).json({ error: "Failed to create user data" });
   }
 });
@@ -76,6 +100,9 @@ router.get("/getsession", authMiddleware, async (req, res) => {
     const sessions = await prisma.session.findMany({
       where: {
         userId: userId,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
     res.status(200).json(sessions);

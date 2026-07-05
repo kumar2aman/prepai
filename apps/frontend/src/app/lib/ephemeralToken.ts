@@ -9,7 +9,11 @@ export async function getEphemeralToken(): Promise<string | null> {
     console.log("Ephemeral token:", res.data);
     return res.data.token;
   } catch (error) {
-    console.error("Error fetching ephemeral token:", error);
+    if (axios.isAxiosError(error)) {
+      console.error("Error fetching ephemeral token:", error.response?.data || error.message);
+    } else {
+      console.error("Error fetching ephemeral token:", error);
+    }
     return null;
   }
 }

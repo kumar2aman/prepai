@@ -3341,8 +3341,24 @@ export namespace Prisma {
 
   export type AggregateSession = {
     _count: SessionCountAggregateOutputType | null
+    _avg: SessionAvgAggregateOutputType | null
+    _sum: SessionSumAggregateOutputType | null
     _min: SessionMinAggregateOutputType | null
     _max: SessionMaxAggregateOutputType | null
+  }
+
+  export type SessionAvgAggregateOutputType = {
+    score: number | null
+    level: number | null
+    accuracy: number | null
+    streak: number | null
+  }
+
+  export type SessionSumAggregateOutputType = {
+    score: number | null
+    level: number | null
+    accuracy: number | null
+    streak: number | null
   }
 
   export type SessionMinAggregateOutputType = {
@@ -3350,6 +3366,11 @@ export namespace Prisma {
     name: string | null
     createdAt: Date | null
     userId: string | null
+    score: number | null
+    level: number | null
+    accuracy: number | null
+    streak: number | null
+    progress: string | null
   }
 
   export type SessionMaxAggregateOutputType = {
@@ -3357,6 +3378,11 @@ export namespace Prisma {
     name: string | null
     createdAt: Date | null
     userId: string | null
+    score: number | null
+    level: number | null
+    accuracy: number | null
+    streak: number | null
+    progress: string | null
   }
 
   export type SessionCountAggregateOutputType = {
@@ -3364,15 +3390,39 @@ export namespace Prisma {
     name: number
     createdAt: number
     userId: number
+    score: number
+    level: number
+    accuracy: number
+    streak: number
+    progress: number
     _all: number
   }
 
+
+  export type SessionAvgAggregateInputType = {
+    score?: true
+    level?: true
+    accuracy?: true
+    streak?: true
+  }
+
+  export type SessionSumAggregateInputType = {
+    score?: true
+    level?: true
+    accuracy?: true
+    streak?: true
+  }
 
   export type SessionMinAggregateInputType = {
     id?: true
     name?: true
     createdAt?: true
     userId?: true
+    score?: true
+    level?: true
+    accuracy?: true
+    streak?: true
+    progress?: true
   }
 
   export type SessionMaxAggregateInputType = {
@@ -3380,6 +3430,11 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     userId?: true
+    score?: true
+    level?: true
+    accuracy?: true
+    streak?: true
+    progress?: true
   }
 
   export type SessionCountAggregateInputType = {
@@ -3387,6 +3442,11 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     userId?: true
+    score?: true
+    level?: true
+    accuracy?: true
+    streak?: true
+    progress?: true
     _all?: true
   }
 
@@ -3428,6 +3488,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: SessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SessionMinAggregateInputType
@@ -3458,6 +3530,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SessionCountAggregateInputType | true
+    _avg?: SessionAvgAggregateInputType
+    _sum?: SessionSumAggregateInputType
     _min?: SessionMinAggregateInputType
     _max?: SessionMaxAggregateInputType
   }
@@ -3467,7 +3541,14 @@ export namespace Prisma {
     name: string
     createdAt: Date
     userId: string
+    score: number
+    level: number
+    accuracy: number
+    streak: number
+    progress: string
     _count: SessionCountAggregateOutputType | null
+    _avg: SessionAvgAggregateOutputType | null
+    _sum: SessionSumAggregateOutputType | null
     _min: SessionMinAggregateOutputType | null
     _max: SessionMaxAggregateOutputType | null
   }
@@ -3491,6 +3572,11 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     userId?: boolean
+    score?: boolean
+    level?: boolean
+    accuracy?: boolean
+    streak?: boolean
+    progress?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
@@ -3499,6 +3585,11 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     userId?: boolean
+    score?: boolean
+    level?: boolean
+    accuracy?: boolean
+    streak?: boolean
+    progress?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
@@ -3507,6 +3598,11 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     userId?: boolean
+    score?: boolean
+    level?: boolean
+    accuracy?: boolean
+    streak?: boolean
+    progress?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
@@ -3515,9 +3611,14 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     userId?: boolean
+    score?: boolean
+    level?: boolean
+    accuracy?: boolean
+    streak?: boolean
+    progress?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "userId", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "userId" | "score" | "level" | "accuracy" | "streak" | "progress", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3538,6 +3639,11 @@ export namespace Prisma {
       name: string
       createdAt: Date
       userId: string
+      score: number
+      level: number
+      accuracy: number
+      streak: number
+      progress: string
     }, ExtArgs["result"]["session"]>
     composites: {}
   }
@@ -3966,6 +4072,11 @@ export namespace Prisma {
     readonly name: FieldRef<"Session", 'String'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
     readonly userId: FieldRef<"Session", 'String'>
+    readonly score: FieldRef<"Session", 'Int'>
+    readonly level: FieldRef<"Session", 'Int'>
+    readonly accuracy: FieldRef<"Session", 'Int'>
+    readonly streak: FieldRef<"Session", 'Int'>
+    readonly progress: FieldRef<"Session", 'String'>
   }
     
 
@@ -4424,7 +4535,12 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     createdAt: 'createdAt',
-    userId: 'userId'
+    userId: 'userId',
+    score: 'score',
+    level: 'level',
+    accuracy: 'accuracy',
+    streak: 'streak',
+    progress: 'progress'
   };
 
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -4661,6 +4777,11 @@ export namespace Prisma {
     name?: StringFilter<"Session"> | string
     createdAt?: DateTimeFilter<"Session"> | Date | string
     userId?: StringFilter<"Session"> | string
+    score?: IntFilter<"Session"> | number
+    level?: IntFilter<"Session"> | number
+    accuracy?: IntFilter<"Session"> | number
+    streak?: IntFilter<"Session"> | number
+    progress?: StringFilter<"Session"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -4669,6 +4790,11 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    accuracy?: SortOrder
+    streak?: SortOrder
+    progress?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -4680,6 +4806,11 @@ export namespace Prisma {
     name?: StringFilter<"Session"> | string
     createdAt?: DateTimeFilter<"Session"> | Date | string
     userId?: StringFilter<"Session"> | string
+    score?: IntFilter<"Session"> | number
+    level?: IntFilter<"Session"> | number
+    accuracy?: IntFilter<"Session"> | number
+    streak?: IntFilter<"Session"> | number
+    progress?: StringFilter<"Session"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -4688,9 +4819,16 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    accuracy?: SortOrder
+    streak?: SortOrder
+    progress?: SortOrder
     _count?: SessionCountOrderByAggregateInput
+    _avg?: SessionAvgOrderByAggregateInput
     _max?: SessionMaxOrderByAggregateInput
     _min?: SessionMinOrderByAggregateInput
+    _sum?: SessionSumOrderByAggregateInput
   }
 
   export type SessionScalarWhereWithAggregatesInput = {
@@ -4701,6 +4839,11 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Session"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     userId?: StringWithAggregatesFilter<"Session"> | string
+    score?: IntWithAggregatesFilter<"Session"> | number
+    level?: IntWithAggregatesFilter<"Session"> | number
+    accuracy?: IntWithAggregatesFilter<"Session"> | number
+    streak?: IntWithAggregatesFilter<"Session"> | number
+    progress?: StringWithAggregatesFilter<"Session"> | string
   }
 
   export type UserCreateInput = {
@@ -4854,6 +4997,11 @@ export namespace Prisma {
     id?: string
     name: string
     createdAt?: Date | string
+    score?: number
+    level?: number
+    accuracy?: number
+    streak?: number
+    progress?: string
     user: UserCreateNestedOneWithoutSessionInput
   }
 
@@ -4862,12 +5010,22 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     userId: string
+    score?: number
+    level?: number
+    accuracy?: number
+    streak?: number
+    progress?: string
   }
 
   export type SessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    accuracy?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    progress?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutSessionNestedInput
   }
 
@@ -4876,6 +5034,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    accuracy?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    progress?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionCreateManyInput = {
@@ -4883,12 +5046,22 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     userId: string
+    score?: number
+    level?: number
+    accuracy?: number
+    streak?: number
+    progress?: string
   }
 
   export type SessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    accuracy?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    progress?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionUncheckedUpdateManyInput = {
@@ -4896,6 +5069,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    accuracy?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    progress?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5110,6 +5288,18 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    accuracy?: SortOrder
+    streak?: SortOrder
+    progress?: SortOrder
+  }
+
+  export type SessionAvgOrderByAggregateInput = {
+    score?: SortOrder
+    level?: SortOrder
+    accuracy?: SortOrder
+    streak?: SortOrder
   }
 
   export type SessionMaxOrderByAggregateInput = {
@@ -5117,6 +5307,11 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    accuracy?: SortOrder
+    streak?: SortOrder
+    progress?: SortOrder
   }
 
   export type SessionMinOrderByAggregateInput = {
@@ -5124,6 +5319,18 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    score?: SortOrder
+    level?: SortOrder
+    accuracy?: SortOrder
+    streak?: SortOrder
+    progress?: SortOrder
+  }
+
+  export type SessionSumOrderByAggregateInput = {
+    score?: SortOrder
+    level?: SortOrder
+    accuracy?: SortOrder
+    streak?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -5429,12 +5636,22 @@ export namespace Prisma {
     id?: string
     name: string
     createdAt?: Date | string
+    score?: number
+    level?: number
+    accuracy?: number
+    streak?: number
+    progress?: string
   }
 
   export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
     createdAt?: Date | string
+    score?: number
+    level?: number
+    accuracy?: number
+    streak?: number
+    progress?: string
   }
 
   export type SessionCreateOrConnectWithoutUserInput = {
@@ -5504,6 +5721,11 @@ export namespace Prisma {
     name?: StringFilter<"Session"> | string
     createdAt?: DateTimeFilter<"Session"> | Date | string
     userId?: StringFilter<"Session"> | string
+    score?: IntFilter<"Session"> | number
+    level?: IntFilter<"Session"> | number
+    accuracy?: IntFilter<"Session"> | number
+    streak?: IntFilter<"Session"> | number
+    progress?: StringFilter<"Session"> | string
   }
 
   export type UserCreateWithoutUserdataInput = {
@@ -5614,24 +5836,44 @@ export namespace Prisma {
     id?: string
     name: string
     createdAt?: Date | string
+    score?: number
+    level?: number
+    accuracy?: number
+    streak?: number
+    progress?: string
   }
 
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    accuracy?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    progress?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    accuracy?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    progress?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    score?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    accuracy?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    progress?: StringFieldUpdateOperationsInput | string
   }
 
 

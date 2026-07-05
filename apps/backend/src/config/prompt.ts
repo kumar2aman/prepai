@@ -1,7 +1,7 @@
 import { chatHistory } from "../api/v1/geminiAudio.js";
 
 
-export const prompt = `
+export const getPrompt = () => `
 
 Act as a software interviewer on give points, Analyze the following chat between the user and AI interviewer. Based on the user's performance, return a JSON object with the following fields only:
 

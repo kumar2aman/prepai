@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 import { GoogleGenAI } from "@google/genai";
-import { prompt } from "../config/prompt.js";
+import { getPrompt } from "../config/prompt.js";
 import { chatHistory } from "../api/v1/geminiAudio.js";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY_STT! });
@@ -28,7 +28,7 @@ console.log("chatHistory", chatHistory)
         includeThoughts: false,
       },
     },
-    contents: prompt,
+    contents: getPrompt(),
   });
   if (!response.text) {
     throw new Error("Failed to generate response");

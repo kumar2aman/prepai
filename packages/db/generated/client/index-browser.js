@@ -144,7 +144,12 @@ exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   name: 'name',
   createdAt: 'createdAt',
-  userId: 'userId'
+  userId: 'userId',
+  score: 'score',
+  level: 'level',
+  accuracy: 'accuracy',
+  streak: 'streak',
+  progress: 'progress'
 };
 
 exports.Prisma.SortOrder = {

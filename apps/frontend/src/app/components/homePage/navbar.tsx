@@ -28,9 +28,9 @@ const signupHandler = () => {
         </div>
         
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
-          <a href="#how-it-works" className="text-gray-300 hover:text-white transition-colors">How It Works</a>
-          <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
+          <a href="/#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
+          <a href="/#how-it-works" className="text-gray-300 hover:text-white transition-colors">How It Works</a>
+          <a href="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
           <Button onClick={signinHandler} variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
             Sign In
           </Button>

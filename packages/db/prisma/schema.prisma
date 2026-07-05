@@ -38,8 +38,13 @@ model Session {
   id            String   @id @default(uuid())
   name          String
   createdAt     DateTime @default(now())
-  user          User @relation(fields: [userId], references: [id])
+  user          User     @relation(fields: [userId], references: [id])
   userId        String
+  score         Int      @default(0)
+  level         Int      @default(0)
+  accuracy      Int      @default(0)
+  streak        Int      @default(0)
+  progress      String   @default("0")
 }
 
 
