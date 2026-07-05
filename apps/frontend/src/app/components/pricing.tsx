@@ -25,6 +25,7 @@ export default function Pricing() {
       buttonText: "Start Prep, No Cap",
       features: [
         "100% free, absolutely zero cost",
+        "Add your own Google Gemini API key",
         "Infinite mock interviews, no limit",
         "Real-time feedback with main character energy",
         "Interactive voice sessions that actually hit",
@@ -43,6 +44,7 @@ export default function Pricing() {
       buttonText: "Claim Free Pro Rizz",
       features: [
         "Unlock ultimate interview confidence",
+        "Plug in your Google Gemini API key",
         "Zero ads, zero credit card, zero drama",
         "Rent-free mock interviews in your browser",
         "Level up your technical verbal rizz",
@@ -61,6 +63,7 @@ export default function Pricing() {
       buttonText: "Star on GitHub (Good Vibes Only)",
       features: [
         "Specially designed for maximum salary gains",
+        "Simply add your Gemini API key to start",
         "Non-profit energy, we're just vibing",
         "Pay us in good luck and positive reviews",
         "Go secure that bag, bestie 💅",
@@ -165,11 +168,22 @@ export default function Pricing() {
         })}
       </div>
 
-      {/* GenZ Humor Disclaimer */}
-      <div className="mt-16 text-center max-w-2xl mx-auto p-6 bg-white/5 border border-white/5 rounded-2xl relative z-10">
-        <p className="text-sm text-gray-400 italic font-open">
-          "Wait, y'all actually wanted to pay? Nah, we are currently in our 'giving back to the community' era. No credit card, no subscription, no cap. Just pure masterclass interview prep. Go cook, you absolute legend."
-        </p>
+      {/* Coming Soon BYOK Notice */}
+      <div className="mt-12 max-w-4xl mx-auto p-8 md:p-10 bg-gradient-to-r from-blue-500/10 to-teal-500/10 border border-blue-500/25 rounded-3xl relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left shadow-xl shadow-blue-500/5">
+        <div className="w-16 h-16 rounded-2xl bg-blue-500/15 flex items-center justify-center text-blue-400 shrink-0 mx-auto md:mx-0 shadow-inner">
+          <Sparkles className="w-8 h-8 animate-pulse text-teal-400" />
+        </div>
+        <div>
+          <div className="inline-block px-3 py-1 text-[10px] font-bold tracking-widest text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-full uppercase mb-3">
+            In The Oven 🧑‍🍳
+          </div>
+          <h4 className="text-xl md:text-2xl font-ubuntu font-bold text-white mb-2 tracking-wide">
+            <span className="gradient-blue bg-clip-text text-transparent font-extrabold">BYOK (Bring Your Own Key)</span> is Cooking!
+          </h4>
+          <p className="text-sm md:text-base text-gray-300 leading-relaxed font-open font-medium">
+            We are actively building a feature that lets you plug in your own Google Gemini API key directly. Soon you'll be able to practice entirely self-hosted, running unlimited mock interviews on your own terms. Stay tuned!
+          </p>
+        </div>
       </div>
     </section>
   );

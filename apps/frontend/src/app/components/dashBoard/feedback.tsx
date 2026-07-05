@@ -35,8 +35,7 @@ export default function FeedbackDialog({ isOpen, onOpenChange }: FeedbackDialogP
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[500px] bg-black/95 backdrop-blur-xl border-white/10 text-white shadow-2xl p-0 overflow-hidden rounded-2xl">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-b from-purple-500 to-indigo-500" />
+      <DialogContent className="sm:max-w-[600px] bg-black/95 backdrop-blur-xl border-white/10 text-white shadow-2xl p-0 overflow-hidden rounded-2xl">
         <DialogHeader className="p-6 pb-2">
           <DialogTitle className="text-2xl font-bold font-ubuntu tracking-wide flex items-center gap-2">
             <MessageSquare className="text-purple-400" size={24} />
@@ -111,7 +110,7 @@ export default function FeedbackDialog({ isOpen, onOpenChange }: FeedbackDialogP
                     ? "What feature would you like to see? Describe how it would work..."
                     : "Any thoughts, ideas, or general feedback..."
                 }
-                className="w-full h-32 p-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 resize-none text-sm font-ubuntu"
+                className="w-full h-44 p-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 resize-none text-sm font-ubuntu"
                 value={feedbackMessage}
                 onChange={(e) => setFeedbackMessage(e.target.value)}
               />
@@ -120,7 +119,7 @@ export default function FeedbackDialog({ isOpen, onOpenChange }: FeedbackDialogP
             <Button
               type="button"
               onClick={handleSubmit}
-              className={`w-full py-4 text-base font-bold bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white border-0 shadow-lg shadow-purple-500/20 transition-all duration-300 font-ubuntu ${
+              className={`w-full py-6 text-base font-bold bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white border-0 shadow-lg shadow-purple-500/20 transition-all duration-300 font-ubuntu ${
                 !feedbackMessage.trim() ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02] cursor-pointer"
               }`}
               disabled={!feedbackMessage.trim()}

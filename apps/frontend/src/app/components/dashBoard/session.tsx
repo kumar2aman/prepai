@@ -63,7 +63,11 @@ function Session() {
 
         <div className="p-6 space-y-3">
           {sessions.length === 0 ? (
-            <p className="text-sm text-gray-500 py-4 text-center">No sessions recorded yet.</p>
+            <div className="p-6 rounded-xl bg-blue-500/5 border border-blue-500/10 text-center">
+              <p className="text-m font-medium font-open text-gray-300">
+                🎙️ Start giving mock interviews to see your session reports!
+              </p>
+            </div>
           ) : (
             sessions.map((session, index) => (
               <div
@@ -112,7 +116,6 @@ function Session() {
       {/* Session Details Dialog */}
       <Dialog open={isDetailOpen} onOpenChange={setIsDetailOpen}>
         <DialogContent className="sm:max-w-[500px] bg-black/95 backdrop-blur-xl border-white/10 text-white shadow-2xl p-0 overflow-hidden rounded-2xl">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-teal-500 to-purple-500" />
           <DialogHeader className="p-6 pb-2">
             <DialogTitle className="text-2xl font-bold font-ubuntu tracking-wide flex items-center gap-2">
               <Sparkles className="text-yellow-400 animate-pulse" size={24} />
