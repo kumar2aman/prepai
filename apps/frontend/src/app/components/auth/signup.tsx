@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { KeyRound, User, Mail, Lock, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -72,7 +73,12 @@ function Signup() {
 
       <main className="relative z-10 w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
         {/* Left Column: Premium Signup Card */}
-        <div className="md:col-span-6 w-full max-w-md mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="md:col-span-6 w-full max-w-md mx-auto"
+        >
           <div className="bg-gray-900/40 backdrop-blur-xl border border-white/10 p-8 rounded-2xl shadow-2xl relative overflow-hidden group">
             {/* Ambient Card Corner Glow */}
             <div className="absolute -top-12 -right-12 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-transparent blur-xl transition-transform duration-500 rounded-full group-hover:scale-150" />
@@ -187,13 +193,18 @@ function Signup() {
               </a>
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Column: Promotional Content */}
-        <div className="md:col-span-6 text-center md:text-left p-6 md:pl-12 flex flex-col justify-center">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="md:col-span-6 text-center md:text-left p-6 md:pl-12 flex flex-col justify-center"
+        >
           {/* Badge */}
           <div className="mb-6 inline-flex items-center p-2 h-10 w-fit bg-gradient-to-r from-blue-500/20 to-teal-500/20 rounded-full border border-blue-500/30 mx-auto md:mx-0">
-            <Zap className="w-4 h-4 text-orange-400 mr-2" />
+            <Zap className="w-4 h-4 text-orange-400 mr-2 animate-pulse" />
             <span className="text-sm text-gray-300">
               Level Up Your verbal rizz
             </span>
@@ -211,7 +222,7 @@ function Signup() {
             Practice with an AI interviewer featuring natural voice flow.
             Get detailed feedback, improve your answers, and start cooking in your interviews. 🚀
           </p>
-        </div>
+        </motion.div>
       </main>
     </div>
   );

@@ -44,10 +44,10 @@ const signupHandler = () => {
           <a href="/#how-it-works" className="text-gray-300 hover:text-white transition-colors">How It Works</a>
           <a href="/pricing" className="text-gray-300 hover:text-white transition-colors">Pricing</a>
         
-          <Button onClick={signinHandler} variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10">
+          <Button onClick={signinHandler} variant="outline" className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10 cursor-pointer">
             Sign In
           </Button>
-          <Button onClick={signupHandler} className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600">
+          <Button onClick={signupHandler} className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 cursor-pointer">
             Get Started
           </Button>
         </div>

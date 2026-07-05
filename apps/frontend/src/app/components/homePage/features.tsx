@@ -1,6 +1,8 @@
+"use client";
 import { features } from "@/app/lib/featuresData";
 import React from "react";
 import { Card, CardContent } from "../ui/card";
+import { motion } from "framer-motion";
 
 function Features() {
   const featureData = features;
@@ -8,38 +10,57 @@ function Features() {
   return (
     <div className="px-6 py-20 max-w-7xl mx-auto">
       <div className="flex flex-col justify-center items-center w-full mt-24 ">
-        <h1 className="font-ubuntu font-medium text-center text-6xl mb-12">
+        <motion.h1 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="font-ubuntu font-medium text-center text-6xl mb-12"
+        >
           Why Choose{" "}
           <span className="gradient-blue  text-transparent bg-clip-text">
             PrepAi
           </span>
-        </h1>
-        <p className="font-open text-l text-center mb-12">
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="font-open text-l text-center mb-12 text-gray-300"
+        >
           Our AI interviewer provides the most realistic practice experience
           with advanced <br />
           features designed to help you succeed.
-        </p>
+        </motion.p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
           {featureData.map((feature, index) => (
-            <Card
+            <motion.div
               key={index}
-              className=" bg-gray-900/50 border-gray-800 hover:bg-gray-900/80 transition-all duration-300 group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <CardContent className="p-6">
-                <div
-                  className={`w-16 h-16 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                >
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-ubuntu font-semibold mb-3 text-white">
-                  {feature.title}
-                </h3>
-                <p className="font-open text-gray-300 leading-relaxed">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
+              <Card
+                className=" bg-gray-900/50 border-gray-800 hover:bg-gray-900/80 transition-all duration-300 group h-full"
+              >
+                <CardContent className="p-6">
+                  <div
+                    className={`w-16 h-16 rounded-lg bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-ubuntu font-semibold mb-3 text-white">
+                    {feature.title}
+                  </h3>
+                  <p className="font-open text-gray-300 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -2,6 +2,7 @@
 import { ArrowRight, Play, Star, Users, Zap } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 function Hero() {
 
@@ -10,40 +11,65 @@ function Hero() {
     <section className="px-6 py-20 max-w-7xl mx-auto">
       <div className="flex flex-col items-center text-center w-full">
         {/* AI-Powered Badge */}
-        <div className="mb-6 inline-flex items-center p-2 h-10 w-fit bg-gradient-to-r from-blue-500/20 to-teal-500/20 rounded-full border border-blue-500/30">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-6 inline-flex items-center p-2 h-10 w-fit bg-gradient-to-r from-blue-500/20 to-teal-500/20 rounded-full border border-blue-500/30"
+        >
           <Zap className="w-4 h-4 text-orange-400 mr-2" />
           <span className="text-sm text-gray-300">
             AI-Powered Interview Preparation
           </span>
-        </div>
+        </motion.div>
 
         {/* Headline */}
-        <h1 className="text-5xl md:text-7xl font-love mb-6 leading-tight text-center">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="text-5xl md:text-7xl font-love mb-6 leading-tight text-center"
+        >
           Master Your <span className="gradient-orange  bg-clip-text text-transparent">Interview Skills</span>
           <br />
           With AI
-        </h1>
+        </motion.h1>
 
         {/* Description */}
-        <p className="text-lg md:text-xl font-open text-gray-300 mb-8 max-w-3xl mx-auto text-center">
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="text-lg md:text-xl font-open text-gray-300 mb-8 max-w-3xl mx-auto text-center"
+        >
           Experience realistic voice interviews powered by advanced AI. 
           Get instant feedback, improve your performance, and land your dream job with confidence.
-        </p>
+        </motion.p>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 mt-8">
-          <Button onClick={()=>{router.push("/auth/signin")}} size="xl" className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 mt-8"
+        >
+          <Button onClick={()=>{router.push("/auth/signin")}} size="xl" className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg cursor-pointer">
             <Play className="w-5 h-5 mr-2 text-black" />
             Start Practice Interview
           </Button>
-          <Button size="xl" variant="outline" className="w-full sm:w-auto border-gray-600 text-gray-300 hover:bg-gray-800 px-8 py-4 text-lg">
+          <Button size="xl" variant="outline" className="w-full sm:w-auto border-gray-600 text-gray-300 hover:bg-gray-800 px-8 py-4 text-lg cursor-pointer">
             Watch Demo
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
-        </div>
+        </motion.div>
         
         {/* Testimonials/Ratings */}
-        <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 text-sm text-gray-400">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 text-sm text-gray-400"
+        >
           <div className="flex -space-x-2">
             {[1, 2, 3, 4, 5].map((i) => (
               <div key={i} className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full border-2 border-black flex items-center justify-center">
@@ -58,7 +84,7 @@ function Hero() {
             ))}
             <span className="ml-2">4/5 rating</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
