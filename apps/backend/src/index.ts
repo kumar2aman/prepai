@@ -41,6 +41,15 @@ app.get("/", (req, res) => {
 app.use("/api/v1", router);
 app.use("/api/v1/auth", authRouter);
 
+// Global Error Handler
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error("Express global error handler caught:", err);
+  res.status(500).json({
+    error: "Internal Server Error",
+    message: err.message || String(err),
+  });
+});
+
 // run server
 app.listen(3001, () => {
   console.log("Server is running on port 3001");
