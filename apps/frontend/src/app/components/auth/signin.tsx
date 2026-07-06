@@ -14,6 +14,16 @@ function Signin() {
 
   const router = useRouter();
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const errorParam = params.get("error");
+      if (errorParam) {
+        setError(decodeURIComponent(errorParam));
+      }
+    }
+  }, []);
+
   const handleSignin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

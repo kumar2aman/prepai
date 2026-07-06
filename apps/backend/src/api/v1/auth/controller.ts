@@ -102,18 +102,29 @@ router.get(
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", { session: false, failureRedirect: "/signin" },),
-  async (req: any, res: any) => {
-    const userId = req.user.id;
+  (req, res, next) => {
+    passport.authenticate("google", { session: false }, async (err: any, user: any, info: any) => {
+      if (err) {
+        const errorMessage = encodeURIComponent(err.message || "Authentication failed");
+        return res.redirect(`${process.env.FRONTEND_URL}/signin?error=${errorMessage}`);
+      }
+      if (!user) {
+        return res.redirect(`${process.env.FRONTEND_URL}/signin?error=user_not_found`);
+      }
+      try {
+        const userId = user.id;
 
-    const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
-      expiresIn: "2d",
-    });
+        const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
+          expiresIn: "2d",
+        });
 
- 
-    res.cookie("token", token, getCookieOptions());
-    res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
-  },
+        res.cookie("token", token, getCookieOptions());
+        res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
+      } catch (error) {
+        next(error);
+      }
+    })(req, res, next);
+  }
 );
 
 router.post("/logout", async (req, res) => {

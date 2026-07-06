@@ -26,20 +26,28 @@ passport.use(
             where:{
                 email
             }
-
         })
 
-        console.log("user:",user)
-         if(user && user.provider !== "google"){
+        console.log("user:", user)
+        if(user && user.provider !== "google"){
              return done(new Error("User already exists"), undefined);
-         }
+        }
 
-          console.log("user 2:",user)
+        console.log("user 2:", user)
         if(!user){
+            // Ensure username is unique to avoid P2002 constraint errors
+            let username = (profile.displayName || email.split("@")[0] || "user") as string;
+            const existingUsername = await prisma.user.findUnique({
+                where: { username }
+            });
+            if (existingUsername) {
+                username = `${username}_${Math.random().toString(36).substring(2, 7)}`;
+            }
+
             user = await prisma.user.create({
                 data: {
                     email,
-                    username: profile.displayName,
+                    username,
                     provider: "google",
                     userdata:{
                         create:{}
