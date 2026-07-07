@@ -39,12 +39,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.4.2
- * Query Engine version: 94a226be1cf2967af2541cca5529f0f7ba866919
+ * Prisma Client JS version: 7.8.0
+ * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
  */
 Prisma.prismaVersion = {
-  client: "7.4.2",
-  engine: "94a226be1cf2967af2541cca5529f0f7ba866919"
+  client: "7.8.0",
+  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -151,8 +151,8 @@ exports.Prisma.ModelName = {
  */
 const config = {
   "previewFeatures": [],
-  "clientVersion": "7.4.2",
-  "engineVersion": "94a226be1cf2967af2541cca5529f0f7ba866919",
+  "clientVersion": "7.8.0",
+  "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
   "activeProvider": "postgresql",
   "inlineSchema": "datasource db {\n  provider = \"postgresql\"\n}\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/client\"\n}\n\nmodel User {\n  id       String    @id @default(uuid())\n  username String    @unique\n  email    String    @unique\n  password String?\n  provider String    @default(\"local\")\n  userdata UserData?\n  session  Session[]\n}\n\nmodel UserData {\n  id           String @id @default(uuid())\n  progress     String @default(\"0\")\n  score        Int    @default(0)\n  level        Int    @default(0)\n  accuracy     Int    @default(0)\n  streak       Int    @default(0)\n  achievements Int    @default(0)\n  totalSession Int    @default(0)\n  user         User   @relation(fields: [userId], references: [id])\n  userId       String @unique\n}\n\nmodel Session {\n  id        String   @id @default(uuid())\n  name      String\n  createdAt DateTime @default(now())\n  user      User     @relation(fields: [userId], references: [id])\n  userId    String\n  score     Int      @default(0)\n  level     Int      @default(0)\n  accuracy  Int      @default(0)\n  streak    Int      @default(0)\n  progress  String   @default(\"0\")\n}\n"
 }
