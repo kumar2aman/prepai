@@ -23,11 +23,17 @@ import {
   Zap,
   MessageSquare,
   HelpCircle,
+  Settings as SettingsIcon,
 } from "lucide-react";
 import axios from "axios";
 import FeedbackDialog from "./feedback";
 
-function Sidebar() {
+interface SidebarProps {
+  activeTab?: string;
+  setActiveTab?: (tab: string) => void;
+}
+
+function Sidebar({ activeTab = "dashboard", setActiveTab }: SidebarProps) {
   const router = useRouter();
   const [sessionName, setSessionName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +41,6 @@ function Sidebar() {
   const [duration, setDuration] = useState(2);
 
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-
-
 
   const handleStart = async () => {
     if (sessionName.trim()) {
@@ -119,14 +123,28 @@ function Sidebar() {
 
         {/* Navigation */}
         <nav className="space-y-2 flex-1 relative z-10">
-          <button className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-600/10 to-transparent text-blue-400 rounded-r-xl transition-all font-semibold font-ubuntu">
-            <Home size={20} />
+          <button
+            onClick={() => setActiveTab?.("dashboard")}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
+              activeTab === "dashboard"
+                ? "bg-gradient-to-r from-blue-600/20 to-transparent border-l-2 border-blue-500 text-blue-400 font-semibold"
+                : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
+            }`}
+          >
+            <Home
+              size={20}
+              className={
+                activeTab === "dashboard"
+                  ? "text-blue-400"
+                  : "group-hover:text-blue-400 transition-colors"
+              }
+            />
             Dashboard
           </button>
 
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-              <button className="w-[11vw]  flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5  rounded-xl transition-all duration-200 font-medium font-ubuntu group">
+              <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer">
                 <Zap
                   size={20}
                   className="group-hover:text-orange-400 transition-colors"
@@ -178,7 +196,11 @@ function Sidebar() {
                       >
                         <type.icon size={20} className={type.color} />
                         <span
-                          className={`text-xs font-medium font-ubuntu ${interviewType === type.id ? "text-white" : "text-gray-400"}`}
+                          className={`text-xs font-medium font-ubuntu ${
+                            interviewType === type.id
+                              ? "text-white"
+                              : "text-gray-400"
+                          }`}
                         >
                           {type.label}
                         </span>
@@ -223,7 +245,11 @@ function Sidebar() {
                 <Button
                   type="submit"
                   onClick={handleStart}
-                  className={`w-full py-6 text-lg font-bold bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-black border-0 shadow-lg shadow-blue-500/20 transition-all duration-300 font-ubuntu ${!sessionName.trim() ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02]"}`}
+                  className={`w-full py-6 text-lg font-bold bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-black border-0 shadow-lg shadow-blue-500/20 transition-all duration-300 font-ubuntu ${
+                    !sessionName.trim()
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:scale-[1.02]"
+                  }`}
                   disabled={!sessionName.trim()}
                 >
                   Start Practice <Play size={18} className="ml-2 fill-black" />
@@ -233,8 +259,27 @@ function Sidebar() {
           </Dialog>
 
           <button
+            onClick={() => setActiveTab?.("settings")}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
+              activeTab === "settings"
+                ? "bg-gradient-to-r from-teal-600/20 to-transparent border-l-2 border-teal-500 text-teal-400 font-semibold"
+                : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
+            }`}
+          >
+            <SettingsIcon
+              size={20}
+              className={
+                activeTab === "settings"
+                  ? "text-teal-400"
+                  : "group-hover:text-teal-400 transition-colors"
+              }
+            />
+            Settings
+          </button>
+
+          <button
             onClick={() => setIsFeedbackOpen(true)}
-            className="w-[11vw] flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer"
+            className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer"
           >
             <MessageSquare
               size={20}
@@ -242,7 +287,10 @@ function Sidebar() {
             />
             Feedback
           </button>
-          <FeedbackDialog isOpen={isFeedbackOpen} onOpenChange={setIsFeedbackOpen} />
+          <FeedbackDialog
+            isOpen={isFeedbackOpen}
+            onOpenChange={setIsFeedbackOpen}
+          />
         </nav>
 
         {/* Footer */}
