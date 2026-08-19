@@ -259,25 +259,6 @@ function Sidebar({ activeTab = "dashboard", setActiveTab }: SidebarProps) {
           </Dialog>
 
           <button
-            onClick={() => setActiveTab?.("settings")}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
-              activeTab === "settings"
-                ? "bg-gradient-to-r from-teal-600/20 to-transparent border-l-2 border-teal-500 text-teal-400 font-semibold"
-                : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
-            }`}
-          >
-            <SettingsIcon
-              size={20}
-              className={
-                activeTab === "settings"
-                  ? "text-teal-400"
-                  : "group-hover:text-teal-400 transition-colors"
-              }
-            />
-            Settings
-          </button>
-
-          <button
             onClick={() => setIsFeedbackOpen(true)}
             className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer"
           >
@@ -294,9 +275,28 @@ function Sidebar({ activeTab = "dashboard", setActiveTab }: SidebarProps) {
         </nav>
 
         {/* Footer */}
-        <div className="mt-auto pt-6 border-t border-white/5 relative z-10">
-          <button className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-500 hover:text-white transition-colors font-ubuntu">
-            <HelpCircle size={16} />
+        <div className="mt-auto pt-4 border-t border-white/5 relative z-10 space-y-1">
+          <button
+            onClick={() => setActiveTab?.("settings")}
+            className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
+              activeTab === "settings"
+                ? "bg-gradient-to-r from-teal-600/20 to-transparent border-l-2 border-teal-500 text-teal-400 font-semibold"
+                : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
+            }`}
+          >
+            <SettingsIcon
+              size={18}
+              className={
+                activeTab === "settings"
+                  ? "text-teal-400"
+                  : "group-hover:text-teal-400 transition-colors"
+              }
+            />
+            Settings
+          </button>
+
+          <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-500 hover:text-white transition-colors font-ubuntu cursor-pointer">
+            <HelpCircle size={18} />
             Help & Support
           </button>
         </div>
