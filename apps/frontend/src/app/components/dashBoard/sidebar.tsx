@@ -106,202 +106,200 @@ function Sidebar({ activeTab = "dashboard", setActiveTab }: SidebarProps) {
   ];
 
   return (
-    <div className="hidden md:block h-screen sticky top-0 border-r border-white/5 bg-black z-20">
-      <aside className="w-72 h-full flex flex-col p-6 font-sans relative overflow-hidden">
-        {/* Ambient Glow */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-blue-500/5 blur-3xl pointer-events-none" />
+    <aside className="hidden md:flex w-64 shrink-0 h-screen sticky top-0 flex-col p-5 font-sans relative overflow-hidden border-r border-white/10 bg-black z-20">
+      {/* Ambient Glow */}
+      <div className="absolute top-0 left-0 w-full h-1/3 bg-blue-500/5 blur-3xl pointer-events-none" />
 
-        {/* Logo */}
-        <div className="flex items-center gap-3 mb-12 relative z-10">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-teal-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <Zap size={20} className="text-white fill-white" />
-          </div>
-          <h1 className="text-2xl font-bold font-love tracking-wide text-white">
-            Prep<span className="text-blue-400">AI</span>
-          </h1>
+      {/* Logo */}
+      <div className="flex items-center gap-3 mb-10 relative z-10">
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-teal-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <Zap size={18} className="text-white fill-white" />
         </div>
+        <h1 className="text-xl font-bold font-love tracking-wide text-white">
+          Prep<span className="text-blue-400">AI</span>
+        </h1>
+      </div>
 
-        {/* Navigation */}
-        <nav className="space-y-2 flex-1 relative z-10">
-          <button
-            onClick={() => setActiveTab?.("dashboard")}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
+      {/* Navigation */}
+      <nav className="space-y-1.5 flex-1 relative z-10">
+        <button
+          onClick={() => setActiveTab?.("dashboard")}
+          className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
+            activeTab === "dashboard"
+              ? "bg-gradient-to-r from-blue-600/20 to-transparent border-l-2 border-blue-500 text-blue-400 font-semibold"
+              : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
+          }`}
+        >
+          <Home
+            size={18}
+            className={
               activeTab === "dashboard"
-                ? "bg-gradient-to-r from-blue-600/20 to-transparent border-l-2 border-blue-500 text-blue-400 font-semibold"
-                : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
-            }`}
-          >
-            <Home
-              size={20}
-              className={
-                activeTab === "dashboard"
-                  ? "text-blue-400"
-                  : "group-hover:text-blue-400 transition-colors"
-              }
-            />
-            Dashboard
-          </button>
+                ? "text-blue-400"
+                : "group-hover:text-blue-400 transition-colors"
+            }
+          />
+          Dashboard
+        </button>
 
-          <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>
-              <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer">
-                <Zap
-                  size={20}
-                  className="group-hover:text-orange-400 transition-colors"
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <button className="w-full flex items-center gap-3 px-3.5 py-2.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer">
+              <Zap
+                size={18}
+                className="group-hover:text-orange-400 transition-colors"
+              />
+              Practice
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[500px] bg-black/95 backdrop-blur-xl border-white/10 text-white shadow-2xl p-0 overflow-hidden rounded-2xl">
+            <div className="absolute top-0 left-0 w-full h-1 " />
+            <DialogHeader className="p-6 pb-2">
+              <DialogTitle className="text-2xl font-bold font-ubuntu tracking-wide">
+                Start{" "}
+                <span className="gradient-blue bg-clip-text text-transparent">
+                  New Session
+                </span>
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="flex flex-col gap-6 p-6 pt-2">
+              {/* Session Name */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider font-open">
+                  Session Name
+                </label>
+                <Input
+                  id="name"
+                  placeholder="e.g., React Senior Dev Interview"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus-visible:ring-blue-500 focus-visible:border-blue-500 h-12"
+                  value={sessionName}
+                  onChange={(e) => setSessionName(e.target.value)}
                 />
-                Practice
-              </button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[500px] bg-black/95 backdrop-blur-xl border-white/10 text-white shadow-2xl p-0 overflow-hidden rounded-2xl">
-              <div className="absolute top-0 left-0 w-full h-1 " />
-              <DialogHeader className="p-6 pb-2">
-                <DialogTitle className="text-2xl font-bold font-ubuntu tracking-wide">
-                  Start{" "}
-                  <span className="gradient-blue bg-clip-text text-transparent">
-                    New Session
-                  </span>
-                </DialogTitle>
-              </DialogHeader>
+              </div>
 
-              <div className="flex flex-col gap-6 p-6 pt-2">
-                {/* Session Name */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-400 uppercase tracking-wider font-open">
-                    Session Name
-                  </label>
-                  <Input
-                    id="name"
-                    placeholder="e.g., React Senior Dev Interview"
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus-visible:ring-blue-500 focus-visible:border-blue-500 h-12"
-                    value={sessionName}
-                    onChange={(e) => setSessionName(e.target.value)}
-                  />
-                </div>
-
-                {/* Interview Type Selection */}
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-400 uppercase tracking-wider font-open">
-                    Interview Type
-                  </label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {interviewTypes.map((type) => (
-                      <button
-                        key={type.id}
-                        onClick={() => setInterviewType(type.id)}
-                        className={`flex flex-col items-center justify-center gap-2 p-3 rounded-xl border transition-all duration-200 ${
+              {/* Interview Type Selection */}
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider font-open">
+                  Interview Type
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  {interviewTypes.map((type) => (
+                    <button
+                      key={type.id}
+                      onClick={() => setInterviewType(type.id)}
+                      className={`flex flex-col items-center justify-center gap-2 p-3 rounded-xl border transition-all duration-200 ${
+                        interviewType === type.id
+                          ? `${type.bg} ${type.border} ring-1 ring-offset-0 ring-blue-500/30`
+                          : "bg-white/5 border-white/5 hover:border-white/20 hover:bg-white/10"
+                      }`}
+                    >
+                      <type.icon size={20} className={type.color} />
+                      <span
+                        className={`text-xs font-medium font-ubuntu ${
                           interviewType === type.id
-                            ? `${type.bg} ${type.border} ring-1 ring-offset-0 ring-blue-500/30`
-                            : "bg-white/5 border-white/5 hover:border-white/20 hover:bg-white/10"
+                            ? "text-white"
+                            : "text-gray-400"
                         }`}
                       >
-                        <type.icon size={20} className={type.color} />
-                        <span
-                          className={`text-xs font-medium font-ubuntu ${
-                            interviewType === type.id
-                              ? "text-white"
-                              : "text-gray-400"
-                          }`}
-                        >
-                          {type.label}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Timer Section (Locked) */}
-                <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5 relative overflow-hidden">
-                  <div className="flex justify-between items-center relative z-10">
-                    <label className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider font-open">
-                      <Clock size={14} className="text-blue-400" /> Duration
-                    </label>
-                    <span className="text-xs font-bold text-blue-400 font-ubuntu">
-                      {duration} min
-                    </span>
-                  </div>
-
-                  <div className="relative group z-10 my-2">
-                    <input
-                      type="range"
-                      min="2"
-                      max="15"
-                      value={duration}
-                      disabled
-                      className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-not-allowed opacity-50"
-                    />
-                  </div>
-
-                  {/* Lock Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[1px] z-20">
-                    <div className="bg-orange-500/10 text-orange-400 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-orange-500/20 shadow-lg font-ubuntu">
-                      <Lock size={10} />
-                      Beta version (Locked to 2m)
-                    </div>
-                  </div>
+                        {type.label}
+                      </span>
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              <DialogFooter className="p-6 pt-0">
-                <Button
-                  type="submit"
-                  onClick={handleStart}
-                  className={`w-full py-6 text-lg font-bold bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-black border-0 shadow-lg shadow-blue-500/20 transition-all duration-300 font-ubuntu ${
-                    !sessionName.trim()
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:scale-[1.02]"
-                  }`}
-                  disabled={!sessionName.trim()}
-                >
-                  Start Practice <Play size={18} className="ml-2 fill-black" />
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+              {/* Timer Section (Locked) */}
+              <div className="space-y-3 p-4 rounded-xl bg-white/5 border border-white/5 relative overflow-hidden">
+                <div className="flex justify-between items-center relative z-10">
+                  <label className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider font-open">
+                    <Clock size={14} className="text-blue-400" /> Duration
+                  </label>
+                  <span className="text-xs font-bold text-blue-400 font-ubuntu">
+                    {duration} min
+                  </span>
+                </div>
 
-          <button
-            onClick={() => setIsFeedbackOpen(true)}
-            className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer"
-          >
-            <MessageSquare
-              size={20}
-              className="group-hover:text-purple-400 transition-colors"
-            />
-            Feedback
-          </button>
-          <FeedbackDialog
-            isOpen={isFeedbackOpen}
-            onOpenChange={setIsFeedbackOpen}
+                <div className="relative group z-10 my-2">
+                  <input
+                    type="range"
+                    min="2"
+                    max="15"
+                    value={duration}
+                    disabled
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-not-allowed opacity-50"
+                  />
+                </div>
+
+                {/* Lock Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[1px] z-20">
+                  <div className="bg-orange-500/10 text-orange-400 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-orange-500/20 shadow-lg font-ubuntu">
+                    <Lock size={10} />
+                    Beta version (Locked to 2m)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <DialogFooter className="p-6 pt-0">
+              <Button
+                type="submit"
+                onClick={handleStart}
+                className={`w-full py-6 text-lg font-bold bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-black border-0 shadow-lg shadow-blue-500/20 transition-all duration-300 font-ubuntu ${
+                  !sessionName.trim()
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:scale-[1.02]"
+                }`}
+                disabled={!sessionName.trim()}
+              >
+                Start Practice <Play size={18} className="ml-2 fill-black" />
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        <button
+          onClick={() => setIsFeedbackOpen(true)}
+          className="w-full flex items-center gap-3 px-3.5 py-2.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium font-ubuntu group cursor-pointer"
+        >
+          <MessageSquare
+            size={18}
+            className="group-hover:text-purple-400 transition-colors"
           />
-        </nav>
+          Feedback
+        </button>
+        <FeedbackDialog
+          isOpen={isFeedbackOpen}
+          onOpenChange={setIsFeedbackOpen}
+        />
+      </nav>
 
-        {/* Footer */}
-        <div className="mt-auto pt-4 border-t border-white/5 relative z-10 space-y-1">
-          <button
-            onClick={() => setActiveTab?.("settings")}
-            className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
+      {/* Footer */}
+      <div className="mt-auto pt-4 border-t border-white/10 relative z-10 space-y-1">
+        <button
+          onClick={() => setActiveTab?.("settings")}
+          className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 font-ubuntu cursor-pointer ${
+            activeTab === "settings"
+              ? "bg-gradient-to-r from-teal-600/20 to-transparent border-l-2 border-teal-500 text-teal-400 font-semibold"
+              : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
+          }`}
+        >
+          <SettingsIcon
+            size={18}
+            className={
               activeTab === "settings"
-                ? "bg-gradient-to-r from-teal-600/20 to-transparent border-l-2 border-teal-500 text-teal-400 font-semibold"
-                : "text-gray-400 hover:text-white hover:bg-white/5 font-medium group"
-            }`}
-          >
-            <SettingsIcon
-              size={18}
-              className={
-                activeTab === "settings"
-                  ? "text-teal-400"
-                  : "group-hover:text-teal-400 transition-colors"
-              }
-            />
-            Settings
-          </button>
+                ? "text-teal-400"
+                : "group-hover:text-teal-400 transition-colors"
+            }
+          />
+          Settings
+        </button>
 
-          <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-500 hover:text-white transition-colors font-ubuntu cursor-pointer">
-            <HelpCircle size={18} />
-            Help & Support
-          </button>
-        </div>
-      </aside>
-    </div>
+        <button className="w-full flex items-center gap-3 px-3.5 py-2.5 text-xs text-gray-500 hover:text-white transition-colors font-ubuntu cursor-pointer">
+          <HelpCircle size={16} />
+          Help & Support
+        </button>
+      </div>
+    </aside>
   );
 }
 
