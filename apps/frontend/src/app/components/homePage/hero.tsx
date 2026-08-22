@@ -1,5 +1,5 @@
 "use client";
-import { ArrowRight, Play, Star, Users, Zap } from "lucide-react";
+import { Star, Users, Zap } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -53,13 +53,8 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 mt-8"
         >
-          <Button onClick={()=>{router.push("/auth/signin")}} size="xl" className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg cursor-pointer">
-            <Play className="w-5 h-5 mr-2 text-black" />
+          <Button onClick={()=>{router.push("/auth/signin")}} size="xl" className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 px-8 py-4 text-lg cursor-pointer font-medium">
             Start Practice Interview
-          </Button>
-          <Button size="xl" variant="outline" className="w-full sm:w-auto border-gray-600 text-gray-300 hover:bg-gray-800 px-8 py-4 text-lg cursor-pointer">
-            Watch Demo
-            <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </motion.div>
         
